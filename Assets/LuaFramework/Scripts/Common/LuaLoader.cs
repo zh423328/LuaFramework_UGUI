@@ -3,23 +3,29 @@ using System.Collections;
 using System.IO;
 using LuaInterface;
 
-namespace LuaFramework {
+namespace LuaFramework
+{
     /// <summary>
     /// 集成自LuaFileUtils，重写里面的ReadFile，
     /// </summary>
-    public class LuaLoader : LuaFileUtils {
+    public class LuaLoader : LuaFileUtils
+    {
         private ResourceManager m_resMgr;
 
-        ResourceManager resMgr {
-            get { 
-                if (m_resMgr == null)
+        ResourceManager resMgr
+        {
+            get
+            {
+                if(m_resMgr == null)
                     m_resMgr = AppFacade.Instance.GetManager<ResourceManager>(ManagerName.Resource);
+
                 return m_resMgr;
             }
         }
 
         // Use this for initialization
-        public LuaLoader() {
+        public LuaLoader()
+        {
             instance = this;
             beZip = AppConst.LuaBundleMode;
         }
@@ -28,11 +34,15 @@ namespace LuaFramework {
         /// 添加打入Lua代码的AssetBundle
         /// </summary>
         /// <param name="bundle"></param>
-        public void AddBundle(string bundleName) {
+        public void AddBundle(string bundleName)
+        {
             string url = Util.DataPath + bundleName.ToLower();
-            if (File.Exists(url)) {
-                AssetBundle bundle = AssetBundle.CreateFromFile(url);
-                if (bundle != null)
+
+            if(File.Exists(url))
+            {
+                AssetBundle bundle = AssetBundle.LoadFromFile(url);
+
+                if(bundle != null)
                 {
                     bundleName = bundleName.Replace("lua/", "").Replace(".unity3d", "");
                     base.AddSearchBundle(bundleName.ToLower(), bundle);
@@ -46,8 +56,9 @@ namespace LuaFramework {
         /// </summary>
         /// <param name="fileName"></param>
         /// <returns></returns>
-        public override byte[] ReadFile(string fileName) {
-            return base.ReadFile(fileName);     
+        public override byte[] ReadFile(string fileName)
+        {
+            return base.ReadFile(fileName);
         }
     }
 }

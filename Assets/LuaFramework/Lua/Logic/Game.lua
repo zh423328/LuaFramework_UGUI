@@ -39,23 +39,41 @@ function Game.OnInitOK()
     --注册LuaView--
     this.InitViewPanels();
 
-    this.test_class_func();
-    this.test_pblua_func();
-    this.test_cjson_func();
-    this.test_pbc_func();
-    this.test_lpeg_func();
-    this.test_sproto_func();
-    coroutine.start(this.test_coroutine);
+    --this.test_class_func();
+    --this.test_pblua_func();
+    --this.test_cjson_func();
+    --this.test_pbc_func();
+    --this.test_lpeg_func();
+    --this.test_sproto_func();
+    --coroutine.start(this.test_coroutine);
 
+   -- this.test_gameobj();
+
+    --TestClass.TestFun();
+    --logError("error str");
     CtrlManager.Init();
-    local ctrl = CtrlManager.GetCtrl(CtrlNames.Prompt);
-    if ctrl ~= nil and AppConst.ExampleMode == 1 then
+    local ctrl = CtrlManager.GetCtrl(CtrlNames.Login);
+    --local ctrl = CtrlManager.GetCtrl(CtrlNames.Prompt);
+    if ctrl ~= nil then
         ctrl:Awake();
+        log("login open");
     end
-       
+     
     logWarn('LuaFramework InitOK--->>>');
 end
 
+--测试加载模型
+function Game.test_gameobj()
+    -- body
+    --加载资源，第一个是.unity的名字，第2个参数：要加载其中的资源，第三个函数是回调
+    resMgr:LoadPrefab("ai_ge_001_ty",{"ai_ge_001_ty"},this.onLoadFinish)
+end
+
+function Game.onLoadFinish(objs)
+    -- body
+    local go = GameObject.Instantiate(objs[0]);
+    Util.Log("Finish Load");
+end
 --测试协同--
 function Game.test_coroutine()    
     logWarn("1111");

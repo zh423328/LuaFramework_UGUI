@@ -1,0 +1,28 @@
+#
+# Sprite sheet data for Unity.
+#
+# To import these sprites into your Unity project, download "TexturePackerImporter":
+# http://www.codeandweb.com/texturepacker/unity
+#
+# Sprite sheet: login.png (1024 x 1024)
+# $TexturePacker:SmartUpdate:860a007a2f629dc0a42ec57c0589914d:d204fc76f228bc6407e66b972249c94a:8df0401c4c3d8988d8fd97269b4242f7$
+#
+
+denglu;899;974;98;48;0.5;0.5
+denglumima;2;173;152;35;0.5;0.5
+dengluyouxi;864;348;158;73;0.5;0.5
+gonggao;2;380;684;41;0.5;0.5
+gou;959;879;43;44;0.5;0.5
+jizhumima;715;294;138;35;0.5;0.5
+kuang;2;423;895;599;0.5;0.5
+mimakuang;899;865;58;58;0.5;0.5
+qurenmima;2;136;152;35;0.5;0.5
+shurukuang;162;335;392;43;0.5;0.5
+tongyizhuce;2;273;158;73;0.5;0.5
+xieyi;688;372;174;49;0.5;0.5
+yiyouzhanghao;556;297;157;73;0.5;0.5
+yonghuxieyi;715;331;141;39;0.5;0.5
+youxizhanghao;2;99;151;35;0.5;0.5
+zhaohuimima;858;285;153;61;0.5;0.5
+zhuce;899;925;97;47;0.5;0.5
+zhucexinhao;2;210;153;61;0.5;0.5

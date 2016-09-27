@@ -1,6 +1,7 @@
 require "Common/define"
 require "Controller/PromptCtrl"
 require "Controller/MessageCtrl"
+require "Controller/LoginCtrl"
 
 CtrlManager = {};
 local this = CtrlManager;
@@ -10,6 +11,8 @@ function CtrlManager.Init()
 	logWarn("CtrlManager.Init----->>>");
 	ctrlList[CtrlNames.Prompt] = PromptCtrl.New();
 	ctrlList[CtrlNames.Message] = MessageCtrl.New();
+    --登陆--
+    ctrlList[CtrlNames.Login] = LoginCtrl.New();
 	return this;
 end
 

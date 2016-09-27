@@ -1,0 +1,8 @@
+version: 2
+importPivots: 1
+tpsheetFileNames:
+- Assets/LuaFramework/Examples/login/login.tpsheet
+textureFileNames:
+- Assets/LuaFramework/Examples/login/login.png
+normalmapFileNames:
+- 

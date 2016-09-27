@@ -13,6 +13,10 @@ function PromptPanel.Awake(obj)
 	logWarn("Awake lua--->>"..gameObject.name);
 end
 
+function PromptPanel.Start()
+	-- body--
+	--UpdateBeat:Add(this.Update,self);
+end
 --初始化面板--
 function PromptPanel.InitPanel()
 	this.btnOpen = transform:FindChild("Open").gameObject;
@@ -22,4 +26,10 @@ end
 --单击事件--
 function PromptPanel.OnDestroy()
 	logWarn("OnDestroy---->>>");
+end
+
+---更新事件--
+function PromptPanel.Update()
+	-- body
+	log("promptpanel update...");
 end

@@ -14,12 +14,12 @@ public static class CustomSettings
     public static string saveDir = FrameworkPath + "/ToLua/Source/Generate/";
     public static string luaDir = FrameworkPath + "/Lua/";
     public static string toluaBaseType = FrameworkPath + "/ToLua/BaseType/";
-	public static string toluaLuaDir = FrameworkPath + "/ToLua/Lua";
+    public static string toluaLuaDir = FrameworkPath + "/ToLua/Lua";
 
     //导出时强制做为静态类的类型(注意customTypeList 还要添加这个类型才能导出)
     //unity 有些类作为sealed class, 其实完全等价于静态类
     public static List<Type> staticClassTypes = new List<Type>
-    {        
+    {
         typeof(UnityEngine.Application),
         typeof(UnityEngine.Time),
         typeof(UnityEngine.Screen),
@@ -33,23 +33,23 @@ public static class CustomSettings
     };
 
     //附加导出委托类型(在导出委托时, customTypeList 中牵扯的委托类型都会导出， 无需写在这里)
-    public static DelegateType[] customDelegateList = 
-    {        
-        _DT(typeof(Action)),        
-        _DT(typeof(UnityEngine.Events.UnityAction)),              
+    public static DelegateType[] customDelegateList =
+    {
+        _DT(typeof(Action)),
+        _DT(typeof(UnityEngine.Events.UnityAction)),
     };
 
     //在这里添加你要导出注册到lua的类型列表
-    public static BindType[] customTypeList = 
-    {                
+    public static BindType[] customTypeList =
+    {
         //------------------------为例子导出--------------------------------
         //_GT(typeof(TestEventListener)),
         //_GT(typeof(TestAccount)),
         //_GT(typeof(Dictionary<int, TestAccount>)).SetLibName("AccountMap"),
-        //_GT(typeof(KeyValuePair<int, TestAccount>)),    
+        //_GT(typeof(KeyValuePair<int, TestAccount>)),
         //_GT(typeof(TestExport)),
         //_GT(typeof(TestExport.Space)),
-        //-------------------------------------------------------------------        
+        //-------------------------------------------------------------------
         _GT(typeof(Debugger)).SetNameSpace(null),
 
 #if USING_DOTWEENING
@@ -69,9 +69,9 @@ public static class CustomSettings
         _GT(typeof(Camera)).AddExtendType(typeof(DG.Tweening.ShortcutExtensions)),
         _GT(typeof(AudioSource)).AddExtendType(typeof(DG.Tweening.ShortcutExtensions)),
         //_GT(typeof(LineRenderer)).AddExtendType(typeof(DG.Tweening.ShortcutExtensions)),
-        //_GT(typeof(TrailRenderer)).AddExtendType(typeof(DG.Tweening.ShortcutExtensions)),    
+        //_GT(typeof(TrailRenderer)).AddExtendType(typeof(DG.Tweening.ShortcutExtensions)),
 #else
-                                         
+
         _GT(typeof(Component)),
         _GT(typeof(Transform)),
         _GT(typeof(Material)),
@@ -81,16 +81,16 @@ public static class CustomSettings
         _GT(typeof(AudioSource)),
         //_GT(typeof(LineRenderer))
         //_GT(typeof(TrailRenderer))
-#endif   
-                        
+#endif
+
         _GT(typeof(Behaviour)),
-        _GT(typeof(MonoBehaviour)),        
+        _GT(typeof(MonoBehaviour)),
         _GT(typeof(GameObject)),
         _GT(typeof(TrackedReference)),
         _GT(typeof(Application)),
         _GT(typeof(Physics)),
         _GT(typeof(Collider)),
-        _GT(typeof(Time)),        
+        _GT(typeof(Time)),
         _GT(typeof(Texture)),
         _GT(typeof(Texture2D)),
         _GT(typeof(Shader)),
@@ -108,32 +108,32 @@ public static class CustomSettings
         _GT(typeof(Input)),
         _GT(typeof(KeyCode)),
         _GT(typeof(SkinnedMeshRenderer)),
-        _GT(typeof(Space)),        
-                                           
-        _GT(typeof(MeshRenderer)),            
+        _GT(typeof(Space)),
+
+        _GT(typeof(MeshRenderer)),
         _GT(typeof(ParticleEmitter)),
         _GT(typeof(ParticleRenderer)),
-        _GT(typeof(ParticleAnimator)), 
-                              
+        _GT(typeof(ParticleAnimator)),
+
         _GT(typeof(BoxCollider)),
         _GT(typeof(MeshCollider)),
-        _GT(typeof(SphereCollider)),        
+        _GT(typeof(SphereCollider)),
         _GT(typeof(CharacterController)),
         _GT(typeof(CapsuleCollider)),
-        
-        _GT(typeof(Animation)),        
-        _GT(typeof(AnimationClip)).SetBaseType(typeof(UnityEngine.Object)),        
+
+        _GT(typeof(Animation)),
+        _GT(typeof(AnimationClip)).SetBaseType(typeof(UnityEngine.Object)),
         _GT(typeof(AnimationState)),
         _GT(typeof(AnimationBlendMode)),
-        _GT(typeof(QueueMode)),  
+        _GT(typeof(QueueMode)),
         _GT(typeof(PlayMode)),
         _GT(typeof(WrapMode)),
 
         _GT(typeof(QualitySettings)),
-        _GT(typeof(RenderSettings)),                                                   
-        _GT(typeof(BlendWeights)),           
-        _GT(typeof(RenderTexture)),       
-          
+        _GT(typeof(RenderSettings)),
+        _GT(typeof(BlendWeights)),
+        _GT(typeof(RenderTexture)),
+
         //for LuaFramework
         _GT(typeof(RectTransform)),
         _GT(typeof(Text)),
@@ -151,11 +151,13 @@ public static class CustomSettings
         _GT(typeof(TimerManager)),
         _GT(typeof(ThreadManager)),
         _GT(typeof(NetworkManager)),
-        _GT(typeof(ResourceManager)),		  
+        _GT(typeof(ResourceManager)),
+        // _GT(typeof(TestClass)),
+        //_GT(typeof(LoggerHelper)),
     };
 
     public static List<Type> dynamicList = new List<Type>()
-    {        
+    {
         /*typeof(MeshRenderer),
         typeof(ParticleEmitter),
         typeof(ParticleRenderer),
@@ -169,7 +171,7 @@ public static class CustomSettings
 
         typeof(Animation),
         typeof(AnimationClip),
-        typeof(AnimationState),        
+        typeof(AnimationState),
 
         typeof(BlendWeights),
         typeof(RenderTexture),
@@ -180,7 +182,6 @@ public static class CustomSettings
     //使用方法参见例子14
     public static List<Type> outList = new List<Type>()
     {
-        
     };
 
     static BindType _GT(Type t)
@@ -191,5 +192,5 @@ public static class CustomSettings
     static DelegateType _DT(Type t)
     {
         return new DelegateType(t);
-    }    
+    }
 }
