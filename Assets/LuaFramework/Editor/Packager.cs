@@ -9,9 +9,13 @@ using LuaFramework;
 
 public class Packager
 {
+    private static string cAssetsResourcesPath = "Assets/" + AppConst.AppName + "/Resources";
+
     public static string platform = string.Empty;
     static List<string> paths = new List<string>();
     static List<string> files = new List<string>();
+    static List<string> dirpaths = new List<string>();
+
     static List<AssetBundleBuild> maps = new List<AssetBundleBuild>();
 
     ///-----------------------------------------------------------
@@ -33,7 +37,7 @@ public class Packager
     {
         if(file.EndsWith(".lua")) file += ".txt";
 
-        return AssetDatabase.LoadMainAssetAtPath("Assets/LuaFramework/Examples/Builds/" + file);
+        return AssetDatabase.LoadMainAssetAtPath("Assets/LuaFramework/Resources/Builds/" + file);
     }
 
     [MenuItem("LuaFramework/Build iPhone Resource", false, 100)]
@@ -90,11 +94,7 @@ public class Packager
             HandleLuaFile();
         }
 
-        if(AppConst.ExampleMode)
-        {
-            HandleExampleBundle();
-        }
-
+        HandleResourceBundle();
         string resPath = "Assets/" + AppConst.AssetDir;
         BuildAssetBundleOptions options = BuildAssetBundleOptions.DeterministicAssetBundle |
                                           BuildAssetBundleOptions.UncompressedAssetBundle;
@@ -203,24 +203,92 @@ public class Packager
     }
 
     /// <summary>
+    /// 获取目录下的所有文件夹
+    /// </summary>
+    static void GetResAllDir(string path)
+    {
+        //添加目录
+        dirpaths.Add(path);
+        string[] dirs = Directory.GetDirectories(path);
+
+        for(int i = 0; i < dirs.Length; ++i)
+        {
+            if(dirs[i].StartsWith("."))
+                continue;
+
+            GetResAllDir(dirs[i]);
+        }
+    }
+    /// <summary>
     /// 处理框架实例包
     /// </summary>
-    static void HandleExampleBundle()
+    static void HandleResourceBundle()
     {
         string resPath = AppDataPath + "/" + AppConst.AssetDir + "/";
 
         if(!Directory.Exists(resPath)) Directory.CreateDirectory(resPath);
 
-        AddBuildMap("prompt" + AppConst.ExtName, "*.prefab", "Assets/LuaFramework/Examples/Builds/Prompt");
-        AddBuildMap("message" + AppConst.ExtName, "*.prefab", "Assets/LuaFramework/Examples/Builds/Message");
-        AddBuildMap("prompt_asset" + AppConst.ExtName, "*.png", "Assets/LuaFramework/Examples/Textures/Prompt");
-        AddBuildMap("shared_asset" + AppConst.ExtName, "*.png", "Assets/LuaFramework/Examples/Textures/Shared");
-        //怪物模型的
-        AddBuildMap("ai_ge_001_ty" + AppConst.ExtName, "*.prefab", "Assets/LuaFramework/Examples/Model/ModelPrefabs");
-        //登陆
-        AddBuildMap("login_asset" + AppConst.ExtName, "*.png", "Assets/LuaFramework/Examples/login");
-        AddBuildMap("Login" + AppConst.ExtName, "*.prefab", "Assets/LuaFramework/Examples/login");
+        dirpaths.Clear();
+        GetResAllDir(cAssetsResourcesPath);
+
+        for(int i = 0; i < dirpaths.Count; ++i)
+        {
+            string srcABFileName = string.Empty;
+
+            if(dirpaths[i] == cAssetsResourcesPath)
+            {
+                srcABFileName = "Resources";
+            }
+            else
+            {
+                srcABFileName = dirpaths[i].Substring(cAssetsResourcesPath.Length);
+
+                if(srcABFileName.StartsWith(@"\\"))
+                {
+                    srcABFileName = srcABFileName.Substring(2);
+                }
+                else if(srcABFileName.StartsWith("/") || srcABFileName.StartsWith(@"\"))
+                {
+                    srcABFileName = srcABFileName.Substring(1);
+                }
+
+                srcABFileName = srcABFileName.Replace('\\', '/');
+                srcABFileName = srcABFileName.Replace("/", "$");
+            }
+
+            srcABFileName += AppConst.ExtName;
+            string[] files = Directory.GetFiles(dirpaths[i]);
+            List<string> newfiles = new List<string>();
+
+            for(int j = 0; j < files.Length; j++)
+            {
+                if(files[j].EndsWith(".meta") || files[j].EndsWith(".svn"))
+                    continue;
+
+                files[j] = files[j].Replace('\\', '/');
+                newfiles.Add(files[j]);
+            }
+
+            if(newfiles.Count == 0)
+                continue;
+
+            AssetBundleBuild build = new AssetBundleBuild();
+            build.assetBundleName = srcABFileName;
+            build.assetNames = newfiles.ToArray();
+            maps.Add(build);
+        }
+
+        //AddBuildMap("prompt" + AppConst.ExtName, "*.prefab", "Assets/LuaFramework/Resources/Builds/Prompt");
+        //AddBuildMap("message" + AppConst.ExtName, "*.prefab", "Assets/LuaFramework/Resources/Builds/Message");
+        //AddBuildMap("prompt_asset" + AppConst.ExtName, "*.png", "Assets/LuaFramework/Resources/Textures/Prompt");
+        //AddBuildMap("shared_asset" + AppConst.ExtName, "*.png", "Assets/LuaFramework/Resources/Textures/Shared");
+        ////怪物模型的
+        //AddBuildMap("ai_ge_001_ty" + AppConst.ExtName, "*.prefab", "Assets/LuaFramework/Resources/Model/ModelPrefabs");
+        ////登陆
+        //AddBuildMap("login_asset" + AppConst.ExtName, "*.png", "Assets/LuaFramework/Resources/Builds/Login");
+        //AddBuildMap("Login" + AppConst.ExtName, "*.prefab", "Assets/LuaFramework/Resources/Builds/Login");
     }
+
 
     /// <summary>
     /// 处理Lua文件

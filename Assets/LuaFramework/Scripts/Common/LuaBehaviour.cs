@@ -9,8 +9,10 @@ namespace LuaFramework
 {
     public class LuaBehaviour : View
     {
+        private string abName = string.Empty;
         private string data = null;
         private Dictionary<string, LuaFunction> buttons = new Dictionary<string, LuaFunction>();
+
 
         protected void Awake()
         {
@@ -30,6 +32,19 @@ namespace LuaFramework
         protected void OnClickEvent(GameObject go)
         {
             Util.CallMethod(name, "OnClick", go);
+        }
+
+        public string ABName
+        {
+            set
+            {
+                abName = value;
+            }
+
+            get
+            {
+                return abName;
+            }
         }
 
         /// <summary>
@@ -87,8 +102,8 @@ namespace LuaFramework
         {
             ClearClick();
 #if ASYNC_MODE
-            string abName = name.ToLower().Replace("panel", "");
-            ResManager.UnloadAssetBundle(abName + AppConst.ExtName);
+            //string abName = name.ToLower().Replace("panel", "");
+            ResManager.UnloadAssetBundle(abName);
 #endif
             Util.ClearMemory();
             Debug.Log("~" + name + " was destroy!");

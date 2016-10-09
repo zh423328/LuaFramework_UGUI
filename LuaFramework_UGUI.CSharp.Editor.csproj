@@ -108,7 +108,7 @@
     <Compile Include="Assets\3rd Tools\GenBabeluaApi\Editor\GenLuaApi.cs" />
     <Compile Include="Assets\LuaFramework\Editor\CustomSettings.cs" />
     <Compile Include="Assets\LuaFramework\Editor\Packager.cs" />
-    <Compile Include="Assets\LuaFramework\Examples\Editor\WelcomeScreen.cs" />
+    <Compile Include="Assets\LuaFramework\Editor\WelcomeScreen.cs" />
     <Compile Include="Assets\LuaFramework\ToLua\Editor\Extend\ToLua_LuaInterface_EventObject.cs" />
     <Compile Include="Assets\LuaFramework\ToLua\Editor\Extend\ToLua_LuaInterface_LuaConstructor.cs" />
     <Compile Include="Assets\LuaFramework\ToLua\Editor\Extend\ToLua_LuaInterface_LuaField.cs" />
@@ -129,7 +129,6 @@
   <ItemGroup>
     <None Include="Assets\3rd Tools\GenBabeluaApi\readme.txt" />
     <None Include="Assets\LuaFramework\ToLua\readme.txt" />
-    <None Include="Assets\StreamingAssets\files.txt" />
     <None Include="Assets\codeandweb.com\Editor\SettingsTexturePackerImporter.txt" />
     <None Include="Assets\codeandweb.com\Readme.txt" />
   </ItemGroup>

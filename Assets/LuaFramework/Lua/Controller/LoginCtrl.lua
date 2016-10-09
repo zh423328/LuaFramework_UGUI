@@ -18,7 +18,7 @@ end
 
 function LoginCtrl.Awake()
 	logWarn("LoginCtrl.Awake--->>");
-	panelMgr:CreatePanel('Login', this.OnCreate);
+	panelMgr:CreatePanel('Login','LoginPanel' ,this.OnCreate);
 end
 
 --启动事件--

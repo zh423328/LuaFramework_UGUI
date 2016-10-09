@@ -167,10 +167,10 @@ namespace LuaFramework
         /// </summary>
         public static string md5(string source)
         {
-            MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider();
+            MD5CryptoServiceProvider md5source = new MD5CryptoServiceProvider();
             byte[] data = System.Text.Encoding.UTF8.GetBytes(source);
-            byte[] md5Data = md5.ComputeHash(data, 0, data.Length);
-            md5.Clear();
+            byte[] md5Data = md5source.ComputeHash(data, 0, data.Length);
+            md5source.Clear();
             string destString = "";
 
             for(int i = 0; i < md5Data.Length; i++)

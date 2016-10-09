@@ -12,6 +12,7 @@ public class LuaFramework_LuaBehaviourWrap
 		L.RegFunction("ClearClick", ClearClick);
 		L.RegFunction("__eq", op_Equality);
 		L.RegFunction("__tostring", ToLua.op_ToString);
+		L.RegVar("ABName", get_ABName, set_ABName);
 		L.EndClass();
 	}
 
@@ -81,6 +82,44 @@ public class LuaFramework_LuaBehaviourWrap
 		catch(Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int get_ABName(IntPtr L)
+	{
+		object o = null;
+
+		try
+		{
+			o = ToLua.ToObject(L, 1);
+			LuaFramework.LuaBehaviour obj = (LuaFramework.LuaBehaviour)o;
+			string ret = obj.ABName;
+			LuaDLL.lua_pushstring(L, ret);
+			return 1;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index ABName on a nil value" : e.Message);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int set_ABName(IntPtr L)
+	{
+		object o = null;
+
+		try
+		{
+			o = ToLua.ToObject(L, 1);
+			LuaFramework.LuaBehaviour obj = (LuaFramework.LuaBehaviour)o;
+			string arg0 = ToLua.CheckString(L, 2);
+			obj.ABName = arg0;
+			return 0;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index ABName on a nil value" : e.Message);
 		}
 	}
 }

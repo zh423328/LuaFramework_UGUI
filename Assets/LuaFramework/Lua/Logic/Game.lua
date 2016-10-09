@@ -52,8 +52,8 @@ function Game.OnInitOK()
     --TestClass.TestFun();
     --logError("error str");
     CtrlManager.Init();
-    local ctrl = CtrlManager.GetCtrl(CtrlNames.Login);
-    --local ctrl = CtrlManager.GetCtrl(CtrlNames.Prompt);
+    --local ctrl = CtrlManager.GetCtrl(CtrlNames.Login);
+    local ctrl = CtrlManager.GetCtrl(CtrlNames.Prompt);
     if ctrl ~= nil then
         ctrl:Awake();
         log("login open");
