@@ -6,6 +6,7 @@ using System;
 using System.IO;
 using LuaInterface;
 using UObject = UnityEngine.Object;
+using UnityEngine.SceneManagement;
 
 public class AssetBundleInfo
 {
@@ -30,6 +31,11 @@ namespace LuaFramework
         Dictionary<string, string[]> m_Dependencies = new Dictionary<string, string[]>();
         Dictionary<string, AssetBundleInfo> m_LoadedAssetBundles = new Dictionary<string, AssetBundleInfo>();
         Dictionary<string, List<LoadAssetRequest>> m_LoadRequests = new Dictionary<string, List<LoadAssetRequest>>();
+
+        /// <summary>
+        /// 当前的场景名字
+        /// </summary>
+        private string m_CurScene = string.Empty;
 
         class LoadAssetRequest
         {
@@ -307,6 +313,149 @@ namespace LuaFramework
                 Debug.Log(abName + " has been unloaded successfully");
             }
         }
+
+        #region 切换场景
+        /// <summary>
+        /// 切换场景
+        /// </summary>
+        /// <param name="newsceneName">新场景名字</param>
+        /// <param name="isAsync">是否进行异步加载</param>
+        public void ChangeScene(string newsceneName, string abName, bool isAsync)
+        {
+            if(string.IsNullOrEmpty(newsceneName))
+                return;
+
+            if(!string.IsNullOrEmpty(m_CurScene))
+            {
+                //关闭场景
+                CloseScene(m_CurScene);
+            }
+
+            //加载新场景
+            if(isAsync)
+            {
+                LoadSceneAsync(newsceneName, abName, false, null, false);
+            }
+            else
+            {
+                LoadScene(newsceneName, abName, false);
+            }
+        }
+
+        /// <summary>
+        /// 关闭场景
+        /// </summary>
+        /// <param name="sceneName">场景名字</param>
+        public void CloseScene(string sceneName)
+        {
+#if UNITY_5_2
+            Application.UnloadLevel(sceneName);
+#elif UNITY_5_3 || UNITY_5_4
+            SceneManager.UnloadScene(sceneName);
+#endif
+        }
+
+        /// <summary>
+        /// 同步加载场景
+        /// </summary>
+        /// <param name="sceneName"></param>
+        /// <param name="isAdd"></param>
+        /// <returns></returns>
+        public bool LoadScene(string sceneName, string abName, bool isAdd)
+        {
+            LoadAsset<UObject>(abName, new string[] { }, delegate(UObject[] objs)
+            {
+                DoLoadScene(sceneName, isAdd);
+            });
+            return true;
+        }
+
+        /// <summary>
+        ///异步加载场景
+        /// </summary>
+        /// <param name="sceneName"></param>
+        /// <param name="isAdd"></param>
+        /// <param name="onProcess"></param>
+        /// <param name="isLoadedActive"></param>
+        /// <returns></returns>
+        // isLoadedActive: 是否加载完就激活
+        public bool LoadSceneAsync(string sceneName, string abName, bool isAdd, Action<AsyncOperation> onProcess, bool isLoadedActive = true)
+        {
+            LoadAsset<UObject>(abName, new string[] {}, delegate(UObject[] objs)
+            {
+                DoLoadSceneAsync(sceneName, isAdd, onProcess, isLoadedActive);
+            });
+            return true;
+        }
+
+        private bool DoLoadScene(string sceneName, bool isAdd)
+        {
+            if(isAdd)
+            {
+                //附加
+                SceneManager.LoadScene(sceneName, LoadSceneMode.Additive);
+            }
+            else
+            {
+                SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
+            }
+
+            return true;
+        }
+
+        private bool DoLoadSceneAsync(string sceneName, bool isAdd, Action<AsyncOperation> onProcess, bool isLoadedActive)
+        {
+            AsyncOperation opt;
+
+            if(isAdd)
+            {
+#if UNITY_5_3 || UNITY_5_4
+                opt = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
+#else
+                opt = Application.LoadLevelAdditiveAsync(sceneName);
+#endif
+            }
+            else
+            {
+#if UNITY_5_3 || UNITY_5_4
+                opt = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Single);
+#else
+                opt = Application.LoadLevelAsync(sceneName);
+#endif
+            }
+
+            if(opt == null)
+                return false;
+
+            if(opt.isDone)
+            {
+                if(onProcess != null)
+                    onProcess(opt);
+
+                return true;
+            }
+
+            opt.allowSceneActivation = isLoadedActive;
+
+            if(isLoadedActive)
+                return AsyncMgr.AddAsyncOperation<AsyncOperation, System.Object>(opt, onProcess) != null;
+            else
+            {
+                return AsyncMgr.AddAsyncOperation<AsyncOperation, System.Object>(opt,
+                        delegate(AsyncOperation obj)
+                {
+                    if(onProcess != null)
+                        onProcess(obj);
+
+                    if(obj.progress >= 0.9f)
+                    {
+                        //AsyncMgr.RemoveAsyncOperation(obj);
+                        AsyncMgr.AddDeleteList(obj);
+                    }
+                }) != null;
+            }
+        }
+        #endregion
     }
 }
 #else

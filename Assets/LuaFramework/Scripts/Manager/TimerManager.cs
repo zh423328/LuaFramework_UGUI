@@ -2,15 +2,18 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace LuaFramework {
-    public class TimerInfo {
+namespace LuaFramework
+{
+    public class TimerInfo
+    {
         public long tick;
         public bool stop;
         public bool delete;
-        public Object target;
+        public System.Object target;
         public string className;
 
-        public TimerInfo(string className, Object target) {
+        public TimerInfo(string className, System.Object target)
+        {
             this.className = className;
             this.target = target;
             delete = false;
@@ -18,17 +21,26 @@ namespace LuaFramework {
     }
 
 
-    public class TimerManager : Manager {
+    public class TimerManager : Manager
+    {
         private float interval = 0;
         private List<TimerInfo> objects = new List<TimerInfo>();
 
-        public float Interval {
-            get { return interval; }
-            set { interval = value; }
+        public float Interval
+        {
+            get
+            {
+                return interval;
+            }
+            set
+            {
+                interval = value;
+            }
         }
 
         // Use this for initialization
-        void Start() {
+        void Start()
+        {
             StartTimer(AppConst.TimerInterval);
         }
 
@@ -36,7 +48,8 @@ namespace LuaFramework {
         /// 启动计时器
         /// </summary>
         /// <param name="interval"></param>
-        public void StartTimer(float value) {
+        public void StartTimer(float value)
+        {
             interval = value;
             InvokeRepeating("Run", 0, interval);
         }
@@ -44,7 +57,8 @@ namespace LuaFramework {
         /// <summary>
         /// 停止计时器
         /// </summary>
-        public void StopTimer() {
+        public void StopTimer()
+        {
             CancelInvoke("Run");
         }
 
@@ -53,8 +67,10 @@ namespace LuaFramework {
         /// </summary>
         /// <param name="name"></param>
         /// <param name="o"></param>
-        public void AddTimerEvent(TimerInfo info) {
-            if (!objects.Contains(info)) {
+        public void AddTimerEvent(TimerInfo info)
+        {
+            if(!objects.Contains(info))
+            {
                 objects.Add(info);
             }
         }
@@ -63,8 +79,10 @@ namespace LuaFramework {
         /// 删除计时器事件
         /// </summary>
         /// <param name="name"></param>
-        public void RemoveTimerEvent(TimerInfo info) {
-            if (objects.Contains(info) && info != null) {
+        public void RemoveTimerEvent(TimerInfo info)
+        {
+            if(objects.Contains(info) && info != null)
+            {
                 info.delete = true;
             }
         }
@@ -73,8 +91,10 @@ namespace LuaFramework {
         /// 停止计时器事件
         /// </summary>
         /// <param name="info"></param>
-        public void StopTimerEvent(TimerInfo info) {
-            if (objects.Contains(info) && info != null) {
+        public void StopTimerEvent(TimerInfo info)
+        {
+            if(objects.Contains(info) && info != null)
+            {
                 info.stop = true;
             }
         }
@@ -83,8 +103,10 @@ namespace LuaFramework {
         /// 继续计时器事件
         /// </summary>
         /// <param name="info"></param>
-        public void ResumeTimerEvent(TimerInfo info) {
-            if (objects.Contains(info) && info != null) {
+        public void ResumeTimerEvent(TimerInfo info)
+        {
+            if(objects.Contains(info) && info != null)
+            {
                 info.delete = false;
             }
         }
@@ -92,18 +114,31 @@ namespace LuaFramework {
         /// <summary>
         /// 计时器运行
         /// </summary>
-        void Run() {
-            if (objects.Count == 0) return;
-            for (int i = 0; i < objects.Count; i++) {
+        void Run()
+        {
+            if(objects.Count == 0) return;
+
+            for(int i = 0; i < objects.Count; i++)
+            {
                 TimerInfo o = objects[i];
-                if (o.delete || o.stop) { continue; }
+
+                if(o.delete || o.stop)
+                {
+                    continue;
+                }
+
                 ITimerBehaviour timer = o.target as ITimerBehaviour;
                 timer.TimerUpdate();
                 o.tick++;
             }
+
             /////////////////////////清除标记为删除的事件///////////////////////////
-            for (int i = objects.Count - 1; i >= 0; i--) {
-                if (objects[i].delete) { objects.Remove(objects[i]); }
+            for(int i = objects.Count - 1; i >= 0; i--)
+            {
+                if(objects[i].delete)
+                {
+                    objects.Remove(objects[i]);
+                }
             }
         }
     }

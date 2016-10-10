@@ -87,6 +87,7 @@
     <Compile Include="Assets\LuaFramework\Scripts\Framework\Interfaces\IView.cs" />
     <Compile Include="Assets\LuaFramework\Scripts\LogHelper\LoggerHelper.cs" />
     <Compile Include="Assets\LuaFramework\Scripts\Main.cs" />
+    <Compile Include="Assets\LuaFramework\Scripts\Manager\AsyncOperationMgr.cs" />
     <Compile Include="Assets\LuaFramework\Scripts\Manager\GameManager.cs" />
     <Compile Include="Assets\LuaFramework\Scripts\Manager\Interface\ITimerBehaviour.cs" />
     <Compile Include="Assets\LuaFramework\Scripts\Manager\LuaManager.cs" />

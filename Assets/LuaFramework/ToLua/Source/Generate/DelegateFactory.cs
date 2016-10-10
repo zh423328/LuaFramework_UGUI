@@ -27,6 +27,7 @@ public static class DelegateFactory
 		dict.Add(typeof(UnityEngine.RectTransform.ReapplyDrivenProperties), UnityEngine_RectTransform_ReapplyDrivenProperties);
 		dict.Add(typeof(System.Action<NotiData>), System_Action_NotiData);
 		dict.Add(typeof(System.Action<UnityEngine.Object[]>), System_Action_UnityEngine_Objects);
+		dict.Add(typeof(System.Action<UnityEngine.AsyncOperation>), System_Action_UnityEngine_AsyncOperation);
 	}
 
     [NoToLuaAttribute]
@@ -532,6 +533,49 @@ public static class DelegateFactory
 		else
 		{
 			System.Action<UnityEngine.Object[]> d = (new System_Action_UnityEngine_Objects_Event(func, self)).CallWithSelf;
+			return d;
+		}
+	}
+
+	class System_Action_UnityEngine_AsyncOperation_Event : LuaDelegate
+	{
+		public System_Action_UnityEngine_AsyncOperation_Event(LuaFunction func) : base(func) { }
+		public System_Action_UnityEngine_AsyncOperation_Event(LuaFunction func, LuaTable self) : base(func, self) { }
+
+		public void Call(UnityEngine.AsyncOperation param0)
+		{
+			func.BeginPCall();
+			func.PushObject(param0);
+			func.PCall();
+			func.EndPCall();
+		}
+
+		public void CallWithSelf(UnityEngine.AsyncOperation param0)
+		{
+			func.BeginPCall();
+			func.Push(self);
+			func.PushObject(param0);
+			func.PCall();
+			func.EndPCall();
+		}
+	}
+
+	public static Delegate System_Action_UnityEngine_AsyncOperation(LuaFunction func, LuaTable self, bool flag)
+	{
+		if (func == null)
+		{
+			System.Action<UnityEngine.AsyncOperation> fn = delegate(UnityEngine.AsyncOperation param0) { };
+			return fn;
+		}
+
+		if(!flag)
+		{
+			System.Action<UnityEngine.AsyncOperation> d = (new System_Action_UnityEngine_AsyncOperation_Event(func)).Call;
+			return d;
+		}
+		else
+		{
+			System.Action<UnityEngine.AsyncOperation> d = (new System_Action_UnityEngine_AsyncOperation_Event(func, self)).CallWithSelf;
 			return d;
 		}
 	}

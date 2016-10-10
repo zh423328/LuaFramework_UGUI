@@ -13,6 +13,7 @@ public class Base : MonoBehaviour
     private TimerManager m_TimerMgr;
     private ThreadManager m_ThreadMgr;
     private ObjectPoolManager m_ObjectPoolMgr;
+    private AsyncOperationMgr m_AsyncMgr;
 
     /// <summary>
     /// 注册消息
@@ -139,6 +140,19 @@ public class Base : MonoBehaviour
             }
 
             return m_ObjectPoolMgr;
+        }
+    }
+
+    protected AsyncOperationMgr AsyncMgr
+    {
+        get
+        {
+            if(m_AsyncMgr == null)
+            {
+                m_AsyncMgr = facade.GetManager<AsyncOperationMgr>(ManagerName.AsyncOperationMgr);
+            }
+
+            return m_AsyncMgr;
         }
     }
 }

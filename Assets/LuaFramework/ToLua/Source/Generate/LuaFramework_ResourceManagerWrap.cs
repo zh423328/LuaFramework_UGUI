@@ -10,6 +10,10 @@ public class LuaFramework_ResourceManagerWrap
 		L.RegFunction("Initialize", Initialize);
 		L.RegFunction("LoadPrefab", LoadPrefab);
 		L.RegFunction("UnloadAssetBundle", UnloadAssetBundle);
+		L.RegFunction("ChangeScene", ChangeScene);
+		L.RegFunction("CloseScene", CloseScene);
+		L.RegFunction("LoadScene", LoadScene);
+		L.RegFunction("LoadSceneAsync", LoadSceneAsync);
 		L.RegFunction("__eq", op_Equality);
 		L.RegFunction("__tostring", ToLua.op_ToString);
 		L.EndClass();
@@ -125,6 +129,96 @@ public class LuaFramework_ResourceManagerWrap
 			bool arg1 = LuaDLL.luaL_checkboolean(L, 3);
 			obj.UnloadAssetBundle(arg0, arg1);
 			return 0;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int ChangeScene(IntPtr L)
+	{
+		try
+		{
+			ToLua.CheckArgsCount(L, 4);
+			LuaFramework.ResourceManager obj = (LuaFramework.ResourceManager)ToLua.CheckObject(L, 1, typeof(LuaFramework.ResourceManager));
+			string arg0 = ToLua.CheckString(L, 2);
+			string arg1 = ToLua.CheckString(L, 3);
+			bool arg2 = LuaDLL.luaL_checkboolean(L, 4);
+			obj.ChangeScene(arg0, arg1, arg2);
+			return 0;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int CloseScene(IntPtr L)
+	{
+		try
+		{
+			ToLua.CheckArgsCount(L, 2);
+			LuaFramework.ResourceManager obj = (LuaFramework.ResourceManager)ToLua.CheckObject(L, 1, typeof(LuaFramework.ResourceManager));
+			string arg0 = ToLua.CheckString(L, 2);
+			obj.CloseScene(arg0);
+			return 0;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int LoadScene(IntPtr L)
+	{
+		try
+		{
+			ToLua.CheckArgsCount(L, 4);
+			LuaFramework.ResourceManager obj = (LuaFramework.ResourceManager)ToLua.CheckObject(L, 1, typeof(LuaFramework.ResourceManager));
+			string arg0 = ToLua.CheckString(L, 2);
+			string arg1 = ToLua.CheckString(L, 3);
+			bool arg2 = LuaDLL.luaL_checkboolean(L, 4);
+			bool o = obj.LoadScene(arg0, arg1, arg2);
+			LuaDLL.lua_pushboolean(L, o);
+			return 1;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int LoadSceneAsync(IntPtr L)
+	{
+		try
+		{
+			ToLua.CheckArgsCount(L, 6);
+			LuaFramework.ResourceManager obj = (LuaFramework.ResourceManager)ToLua.CheckObject(L, 1, typeof(LuaFramework.ResourceManager));
+			string arg0 = ToLua.CheckString(L, 2);
+			string arg1 = ToLua.CheckString(L, 3);
+			bool arg2 = LuaDLL.luaL_checkboolean(L, 4);
+			System.Action<UnityEngine.AsyncOperation> arg3 = null;
+			LuaTypes funcType5 = LuaDLL.lua_type(L, 5);
+
+			if (funcType5 != LuaTypes.LUA_TFUNCTION)
+			{
+				 arg3 = (System.Action<UnityEngine.AsyncOperation>)ToLua.CheckObject(L, 5, typeof(System.Action<UnityEngine.AsyncOperation>));
+			}
+			else
+			{
+				LuaFunction func = ToLua.ToLuaFunction(L, 5);
+				arg3 = DelegateFactory.CreateDelegate(typeof(System.Action<UnityEngine.AsyncOperation>), func) as System.Action<UnityEngine.AsyncOperation>;
+			}
+
+			bool arg4 = LuaDLL.luaL_checkboolean(L, 6);
+			bool o = obj.LoadSceneAsync(arg0, arg1, arg2, arg3, arg4);
+			LuaDLL.lua_pushboolean(L, o);
+			return 1;
 		}
 		catch(Exception e)
 		{

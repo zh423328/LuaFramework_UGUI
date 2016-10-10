@@ -2,18 +2,22 @@
 using System.Collections;
 using LuaFramework;
 
-public class StartUpCommand : ControllerCommand {
+public class StartUpCommand : ControllerCommand
+{
 
-    public override void Execute(IMessage message) {
-        if (!Util.CheckEnvironment()) return;
+    public override void Execute(IMessage message)
+    {
+        if(!Util.CheckEnvironment()) return;
 
         GameObject gameMgr = GameObject.Find("GlobalGenerator");
-        if (gameMgr != null) {
+
+        if(gameMgr != null)
+        {
             AppView appView = gameMgr.AddComponent<AppView>();
         }
+
         //-----------------关联命令-----------------------
         AppFacade.Instance.RegisterCommand(NotiConst.DISPATCH_MESSAGE, typeof(SocketCommand));
-
         //-----------------初始化管理器-----------------------
         AppFacade.Instance.AddManager<LuaManager>(ManagerName.Lua);
         AppFacade.Instance.AddManager<PanelManager>(ManagerName.Panel);
@@ -24,5 +28,6 @@ public class StartUpCommand : ControllerCommand {
         AppFacade.Instance.AddManager<ThreadManager>(ManagerName.Thread);
         AppFacade.Instance.AddManager<ObjectPoolManager>(ManagerName.ObjectPool);
         AppFacade.Instance.AddManager<GameManager>(ManagerName.Game);
+        AppFacade.Instance.AddManager<AsyncOperationMgr>(ManagerName.AsyncOperationMgr);
     }
 }

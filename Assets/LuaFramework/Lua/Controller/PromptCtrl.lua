@@ -63,7 +63,7 @@ end
 
 --单击事件--
 function PromptCtrl.OnClick(go)
-	if TestProtoType == ProtocalType.BINARY then
+	--[[if TestProtoType == ProtocalType.BINARY then
 		this.TestSendBinary();
 	end
 	if TestProtoType == ProtocalType.PB_LUA then
@@ -75,7 +75,9 @@ function PromptCtrl.OnClick(go)
 	if TestProtoType == ProtocalType.SPROTO then
 		this.TestSendSproto();
 	end
-	logWarn("OnClick---->>>"..go.name);
+	logWarn("OnClick---->>>"..go.name);]]--
+
+    resMgr:ChangeScene("1","scenes$1",true);
 end
 
 --测试发送SPROTO--

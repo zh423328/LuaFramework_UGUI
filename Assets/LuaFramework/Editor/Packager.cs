@@ -64,6 +64,24 @@ public class Packager
         BuildAssetResource(BuildTarget.StandaloneWindows);
     }
 
+    public static void HandleSceneRes()
+    {
+        string sceneRes = "Assets/" + AppConst.AppName + "/Scenes";
+        string[] files = Directory.GetFiles(sceneRes, "*.unity");
+
+        for(int i = 0; i < files.Length; i++)
+        {
+            string currentFile = files[i].Replace("\\", "/");
+            int startIndex = currentFile.IndexOf(sceneRes);
+            string assetFile = currentFile.Substring(startIndex, currentFile.Length - startIndex);
+            string sceneName = Path.GetFileNameWithoutExtension(assetFile);
+            string srcABFileName = "scenes$" + sceneName + AppConst.ExtName;
+            AssetBundleBuild build = new AssetBundleBuild();
+            build.assetBundleName = srcABFileName;
+            build.assetNames = new string[] { files[i] };
+            maps.Add(build);
+        }
+    }
     /// <summary>
     /// 生成绑定素材
     /// </summary>
@@ -94,6 +112,7 @@ public class Packager
             HandleLuaFile();
         }
 
+        HandleSceneRes();
         HandleResourceBundle();
         string resPath = "Assets/" + AppConst.AssetDir;
         BuildAssetBundleOptions options = BuildAssetBundleOptions.DeterministicAssetBundle |
@@ -127,7 +146,7 @@ public class Packager
     /// <summary>
     /// 处理Lua代码包
     /// </summary>
-    static void HandleLuaBundle()
+    public static void HandleLuaBundle()
     {
         string streamDir = Application.dataPath + "/" + AppConst.LuaTempDir;
 
@@ -220,7 +239,7 @@ public class Packager
         }
     }
     /// <summary>
-    /// 处理框架实例包
+    /// 处理框架实例包,出了场景包
     /// </summary>
     static void HandleResourceBundle()
     {
@@ -262,7 +281,7 @@ public class Packager
 
             for(int j = 0; j < files.Length; j++)
             {
-                if(files[j].EndsWith(".meta") || files[j].EndsWith(".svn"))
+                if(files[j].EndsWith(".meta") || files[j].EndsWith(".svn") || files[j].EndsWith(".unity"))
                     continue;
 
                 files[j] = files[j].Replace('\\', '/');

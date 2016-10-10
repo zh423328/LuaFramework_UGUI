@@ -2,3 +2,5 @@ fileFormatVersion: 2
 guid: 4db2739d8c3e5af4ca5647e7ded00f68
 DefaultImporter:
   userData: 
+  assetBundleName: assets/luaframework/tolua/examples/06_luacoroutine2/coroutine.unity
+  assetBundleVariant: 
