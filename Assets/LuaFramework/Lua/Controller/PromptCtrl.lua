@@ -132,11 +132,11 @@ function PromptCtrl.TestSendSproto()
     }
     local code = sp:encode("AddressBook", ab)
     ----------------------------------------------------------------
-    local buffer = ByteBuffer.New();
+    --[[local buffer = ByteBuffer.New();
     buffer:WriteShort(Protocal.Message);
     buffer:WriteByte(ProtocalType.SPROTO);
     buffer:WriteBuffer(code);
-    networkMgr:SendMessage(buffer);
+    networkMgr:SendMessage(buffer);]]
 end
 
 --测试发送PBC--
@@ -158,16 +158,16 @@ function PromptCtrl.TestSendPbc()
     }
     local code = protobuf.encode("tutorial.Person", addressbook)
     ----------------------------------------------------------------
-    local buffer = ByteBuffer.New();
+    --[[local buffer = ByteBuffer.New();
     buffer:WriteShort(Protocal.Message);
     buffer:WriteByte(ProtocalType.PBC);
     buffer:WriteBuffer(code);
-    networkMgr:SendMessage(buffer);
+    networkMgr:SendMessage(buffer);]]
 end
 
 --测试发送PBLUA--
 function PromptCtrl.TestSendPblua()
-    local login = login_pb.LoginRequest();
+    --[[local login = login_pb.LoginRequest();
     login.id = 2000;
     login.name = 'game';
     login.email = 'jarjin@163.com';
@@ -177,17 +177,17 @@ function PromptCtrl.TestSendPblua()
     buffer:WriteShort(Protocal.Message);
     buffer:WriteByte(ProtocalType.PB_LUA);
     buffer:WriteBuffer(msg);
-    networkMgr:SendMessage(buffer);
+    networkMgr:SendMessage(buffer);]]
 end
 
 --测试发送二进制--
 function PromptCtrl.TestSendBinary()
-    local buffer = ByteBuffer.New();
+    --[[local buffer = ByteBuffer.New();
     buffer:WriteShort(Protocal.Message);
     buffer:WriteByte(ProtocalType.BINARY);
     buffer:WriteString("ffff我的ffffQ靈uuu");
     buffer:WriteInt(200);
-    networkMgr:SendMessage(buffer);
+    networkMgr:SendMessage(buffer);]]
 end
 
 --关闭事件--

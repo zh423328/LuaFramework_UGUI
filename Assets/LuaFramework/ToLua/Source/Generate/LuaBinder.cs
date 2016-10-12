@@ -113,6 +113,7 @@ public static class LuaBinder
 		LuaFramework_ThreadManagerWrap.Register(L);
 		LuaFramework_NetworkManagerWrap.Register(L);
 		LuaFramework_ResourceManagerWrap.Register(L);
+		LuaFramework_NFGUIDWrap.Register(L);
 		L.EndModule();
 		L.BeginModule("System");
 		L.RegFunction("Action", System_Action);

@@ -12,9 +12,10 @@ public class LuaFramework_NetworkManagerWrap
 		L.RegFunction("CallMethod", CallMethod);
 		L.RegFunction("AddEvent", AddEvent);
 		L.RegFunction("SendConnect", SendConnect);
-		L.RegFunction("SendMessage", SendMessage);
+		L.RegFunction("SendMsg", SendMsg);
 		L.RegFunction("__eq", op_Equality);
 		L.RegFunction("__tostring", ToLua.op_ToString);
+		L.RegVar("mMainID", get_mMainID, set_mMainID);
 		L.EndClass();
 	}
 
@@ -103,55 +104,16 @@ public class LuaFramework_NetworkManagerWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int SendMessage(IntPtr L)
+	static int SendMsg(IntPtr L)
 	{
 		try
 		{
-			int count = LuaDLL.lua_gettop(L);
-
-			if (count == 2 && TypeChecker.CheckTypes(L, 1, typeof(LuaFramework.NetworkManager), typeof(string)))
-			{
-				LuaFramework.NetworkManager obj = (LuaFramework.NetworkManager)ToLua.ToObject(L, 1);
-				string arg0 = ToLua.ToString(L, 2);
-				obj.SendMessage(arg0);
-				return 0;
-			}
-			else if (count == 2 && TypeChecker.CheckTypes(L, 1, typeof(LuaFramework.NetworkManager), typeof(LuaFramework.ByteBuffer)))
-			{
-				LuaFramework.NetworkManager obj = (LuaFramework.NetworkManager)ToLua.ToObject(L, 1);
-				LuaFramework.ByteBuffer arg0 = (LuaFramework.ByteBuffer)ToLua.ToObject(L, 2);
-				obj.SendMessage(arg0);
-				return 0;
-			}
-			else if (count == 3 && TypeChecker.CheckTypes(L, 1, typeof(LuaFramework.NetworkManager), typeof(string), typeof(UnityEngine.SendMessageOptions)))
-			{
-				LuaFramework.NetworkManager obj = (LuaFramework.NetworkManager)ToLua.ToObject(L, 1);
-				string arg0 = ToLua.ToString(L, 2);
-				UnityEngine.SendMessageOptions arg1 = (UnityEngine.SendMessageOptions)ToLua.ToObject(L, 3);
-				obj.SendMessage(arg0, arg1);
-				return 0;
-			}
-			else if (count == 3 && TypeChecker.CheckTypes(L, 1, typeof(LuaFramework.NetworkManager), typeof(string), typeof(object)))
-			{
-				LuaFramework.NetworkManager obj = (LuaFramework.NetworkManager)ToLua.ToObject(L, 1);
-				string arg0 = ToLua.ToString(L, 2);
-				object arg1 = ToLua.ToVarObject(L, 3);
-				obj.SendMessage(arg0, arg1);
-				return 0;
-			}
-			else if (count == 4 && TypeChecker.CheckTypes(L, 1, typeof(LuaFramework.NetworkManager), typeof(string), typeof(object), typeof(UnityEngine.SendMessageOptions)))
-			{
-				LuaFramework.NetworkManager obj = (LuaFramework.NetworkManager)ToLua.ToObject(L, 1);
-				string arg0 = ToLua.ToString(L, 2);
-				object arg1 = ToLua.ToVarObject(L, 3);
-				UnityEngine.SendMessageOptions arg2 = (UnityEngine.SendMessageOptions)ToLua.ToObject(L, 4);
-				obj.SendMessage(arg0, arg1, arg2);
-				return 0;
-			}
-			else
-			{
-				return LuaDLL.luaL_throw(L, "invalid arguments to method: LuaFramework.NetworkManager.SendMessage");
-			}
+			ToLua.CheckArgsCount(L, 3);
+			LuaFramework.NetworkManager obj = (LuaFramework.NetworkManager)ToLua.CheckObject(L, 1, typeof(LuaFramework.NetworkManager));
+			int arg0 = (int)LuaDLL.luaL_checknumber(L, 2);
+			LuaFramework.ByteBuffer arg1 = (LuaFramework.ByteBuffer)ToLua.CheckObject(L, 3, typeof(LuaFramework.ByteBuffer));
+			obj.SendMsg(arg0, arg1);
+			return 0;
 		}
 		catch(Exception e)
 		{
@@ -174,6 +136,44 @@ public class LuaFramework_NetworkManagerWrap
 		catch(Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int get_mMainID(IntPtr L)
+	{
+		object o = null;
+
+		try
+		{
+			o = ToLua.ToObject(L, 1);
+			LuaFramework.NetworkManager obj = (LuaFramework.NetworkManager)o;
+			LuaFramework.NFGUID ret = obj.mMainID;
+			ToLua.PushObject(L, ret);
+			return 1;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index mMainID on a nil value" : e.Message);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int set_mMainID(IntPtr L)
+	{
+		object o = null;
+
+		try
+		{
+			o = ToLua.ToObject(L, 1);
+			LuaFramework.NetworkManager obj = (LuaFramework.NetworkManager)o;
+			LuaFramework.NFGUID arg0 = (LuaFramework.NFGUID)ToLua.CheckObject(L, 2, typeof(LuaFramework.NFGUID));
+			obj.mMainID = arg0;
+			return 0;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index mMainID on a nil value" : e.Message);
 		}
 	}
 }

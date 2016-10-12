@@ -28,6 +28,7 @@ public class LuaFramework_UtilWrap
 		L.RegFunction("CheckRuntimeFile", CheckRuntimeFile);
 		L.RegFunction("CallMethod", CallMethod);
 		L.RegFunction("CheckEnvironment", CheckEnvironment);
+		L.RegFunction("NFToPB", NFToPB);
 		L.RegFunction("New", _CreateLuaFramework_Util);
 		L.RegFunction("__tostring", ToLua.op_ToString);
 		L.RegVar("DataPath", get_DataPath, null);
@@ -451,6 +452,23 @@ public class LuaFramework_UtilWrap
 			ToLua.CheckArgsCount(L, 0);
 			bool o = LuaFramework.Util.CheckEnvironment();
 			LuaDLL.lua_pushboolean(L, o);
+			return 1;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int NFToPB(IntPtr L)
+	{
+		try
+		{
+			ToLua.CheckArgsCount(L, 1);
+			LuaFramework.NFGUID arg0 = (LuaFramework.NFGUID)ToLua.CheckObject(L, 1, typeof(LuaFramework.NFGUID));
+			NFMsg.Ident o = LuaFramework.Util.NFToPB(arg0);
+			ToLua.PushObject(L, o);
 			return 1;
 		}
 		catch(Exception e)

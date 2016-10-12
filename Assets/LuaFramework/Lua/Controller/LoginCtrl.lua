@@ -51,13 +51,11 @@ function LoginCtrl.OnClick(go)
     login.device_info = "";
     login.extra_info = "";
     local msg = login:SerializeToString();
-    Util.Log(msg);
+    --Util.Log(msg);
     ----------------------------------------------------------------
-    --[[local buffer = ByteBuffer.New();
-    buffer:WriteShort(Protocal.Message);
-    buffer:WriteByte(ProtocalType.PB_LUA);
+    local buffer = ByteBuffer.New();
     buffer:WriteBuffer(msg);
-    networkMgr:SendMessage(buffer);
+    networkMgr:SendMsg(NFDefine_pb.EGMI_REQ_LOGIN,buffer);
     --]]
 end
 

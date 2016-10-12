@@ -3,14 +3,37 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using LuaInterface;
+using System.Runtime.InteropServices;
+using System.IO;
+using ProtoBuf;
 
 namespace LuaFramework
 {
+    public class ConstDefine
+    {
+        public static int NF_PACKET_HEAD_SIZE = 6;
+        public static int MAX_PACKET_LEN = 655360;
+    };
+
+    [StructLayout(LayoutKind.Sequential, Pack = 1)]
+    public class MsgHead
+    {
+        public MsgHead()
+        {
+            unMsgID = 0;
+            unDataLen = 0;
+        }
+        public UInt16 unMsgID;
+        public UInt32 unDataLen;
+    };
+
     public class NetworkManager : Manager
     {
         private SocketClient socket;
         static readonly object m_lockObject = new object();
         static Queue<KeyValuePair<int, ByteBuffer>> mEvents = new Queue<KeyValuePair<int, ByteBuffer>>();
+
+        public NFGUID mMainID = new NFGUID();
 
         SocketClient SocketClient
         {
@@ -86,9 +109,23 @@ namespace LuaFramework
         /// <summary>
         /// ·¢ËÍSOCKETÏûÏ¢
         /// </summary>
-        public void SendMessage(ByteBuffer buffer)
+        public void SendMsg(int uMsgID, ByteBuffer buffer)
         {
-            SocketClient.SendMessage(buffer);
+            NFMsg.MsgBase xData = new NFMsg.MsgBase();
+            xData.player_id = Util.NFToPB(mMainID);
+            xData.msg_data = buffer.ToBytes();
+            MemoryStream body = new MemoryStream();
+            Serializer.Serialize<NFMsg.MsgBase>(body, xData);
+            MsgHead head = new MsgHead();
+            head.unMsgID = (UInt16)uMsgID;
+            head.unDataLen = (UInt32)body.Length + (UInt32)ConstDefine.NF_PACKET_HEAD_SIZE;
+            byte[] bodyByte = body.ToArray();
+            byte[] headByte = StructureTransform.StructureToByteArrayEndian(head);
+            byte[] sendBytes = new byte[head.unDataLen];
+            headByte.CopyTo(sendBytes, 0);
+            bodyByte.CopyTo(sendBytes, headByte.Length);
+            SocketClient.SendMessage(sendBytes);
+            buffer.Close();
         }
 
         /// <summary>

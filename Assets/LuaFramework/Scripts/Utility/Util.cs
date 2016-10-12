@@ -427,5 +427,14 @@ namespace LuaFramework
 #endif
             return true;
         }
+
+
+        public static NFMsg.Ident NFToPB(NFGUID xID)
+        {
+            NFMsg.Ident xIdent = new NFMsg.Ident();
+            xIdent.svrid = xID.nHead64;
+            xIdent.index = xID.nData64;
+            return xIdent;
+        }
     }
 }
