@@ -490,12 +490,12 @@ public class Packager
             return;
         }
 
-        string dir = AppDataPath + "/Lua/3rd/pblua";
+        string dir = AppConst.FrameworkRoot + "/Lua/3rd/pblua";
         paths.Clear();
         files.Clear();
         Recursive(dir);
-        string protoc = "d:/protobuf-2.4.1/src/protoc.exe";
-        string protoc_gen_dir = "\"d:/protoc-gen-lua/plugin/protoc-gen-lua.bat\"";
+        string protoc = "F:/GitHub/proto-lua/protoc-gen-lua/protoc-gen-lua/example/proto/protoc.exe";
+        string protoc_gen_dir = "\"F:/GitHub/proto-lua/protoc-gen-lua/protoc-gen-lua/plugin/protoc-gen-lua.bat\"";
 
         foreach(string f in files)
         {

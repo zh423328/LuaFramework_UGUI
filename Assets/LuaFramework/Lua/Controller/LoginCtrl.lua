@@ -1,7 +1,9 @@
 --region *.lua
 --Date
 --登陆管理
-
+require("3rd/pblua/NFDefine_pb")
+require("3rd/pblua/NFMsgBase_pb")
+require "3rd/pblua/NFMsgPreGame_pb"
 
 LoginCtrl = {};
 local this = LoginCtrl;
@@ -18,7 +20,7 @@ end
 
 function LoginCtrl.Awake()
 	logWarn("LoginCtrl.Awake--->>");
-	panelMgr:CreatePanel('Login','LoginPanel' ,this.OnCreate);
+	panelMgr:CreatePanel('builds$login','LoginPanel' ,this.OnCreate);
 end
 
 --启动事件--
@@ -35,6 +37,28 @@ end
 function LoginCtrl.OnClick(go)
 	--destroy(gameObject);
     log("click login");
+
+    --登陆--
+    local login = NFMsgPreGame_pb.ReqAccountLogin();
+    login.account = "test1";
+    login.password = "123456";
+    login.security_code = "";
+    login.signBuff = "";
+    login.clientVersion = 1;
+    login.loginMode = 0;
+    login.clientIP = 0;
+    login.clientMAC = 0;
+    login.device_info = "";
+    login.extra_info = "";
+    local msg = login:SerializeToString();
+    Util.Log(msg);
+    ----------------------------------------------------------------
+    --[[local buffer = ByteBuffer.New();
+    buffer:WriteShort(Protocal.Message);
+    buffer:WriteByte(ProtocalType.PB_LUA);
+    buffer:WriteBuffer(msg);
+    networkMgr:SendMessage(buffer);
+    --]]
 end
 
 --关闭事件--

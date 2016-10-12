@@ -2,12 +2,13 @@
 local protobuf = require "protobuf/protobuf"
 module('login_pb')
 
-local LOGINREQUEST = protobuf.Descriptor();
-local LOGINREQUEST_ID_FIELD = protobuf.FieldDescriptor();
-local LOGINREQUEST_NAME_FIELD = protobuf.FieldDescriptor();
-local LOGINREQUEST_EMAIL_FIELD = protobuf.FieldDescriptor();
-local LOGINRESPONSE = protobuf.Descriptor();
-local LOGINRESPONSE_ID_FIELD = protobuf.FieldDescriptor();
+
+LOGINREQUEST = protobuf.Descriptor();
+LOGINREQUEST_ID_FIELD = protobuf.FieldDescriptor();
+LOGINREQUEST_NAME_FIELD = protobuf.FieldDescriptor();
+LOGINREQUEST_EMAIL_FIELD = protobuf.FieldDescriptor();
+LOGINRESPONSE = protobuf.Descriptor();
+LOGINRESPONSE_ID_FIELD = protobuf.FieldDescriptor();
 
 LOGINREQUEST_ID_FIELD.name = "id"
 LOGINREQUEST_ID_FIELD.full_name = ".LoginRequest.id"

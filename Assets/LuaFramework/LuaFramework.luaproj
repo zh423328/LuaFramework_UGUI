@@ -59,6 +59,12 @@
     <Content Include="Lua\3rd\pbc\addressbook.pb" />
     <Content Include="Lua\3rd\pbc\addressbook.proto" />
     <Content Include="Lua\3rd\pblua\login.proto" />
+    <Content Include="Lua\3rd\pblua\NFDefine.proto" />
+    <Content Include="Lua\3rd\pblua\NFMsgBase.proto" />
+    <Content Include="Lua\3rd\pblua\NFMsgPreGame.proto" />
+    <Content Include="Lua\3rd\pblua\NFMsgShare.proto" />
+    <Content Include="Lua\3rd\pblua\NFMsgURl.proto" />
+    <Content Include="Lua\3rd\pblua\NFSLGDefine.proto" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Lua\3rd\cjson\json2lua.lua" />
@@ -76,6 +82,12 @@
     <Compile Include="Lua\3rd\pbc\test2.lua" />
     <Compile Include="Lua\3rd\pbc\testparser.lua" />
     <Compile Include="Lua\3rd\pblua\login_pb.lua" />
+    <Compile Include="Lua\3rd\pblua\NFDefine_pb.lua" />
+    <Compile Include="Lua\3rd\pblua\NFMsgBase_pb.lua" />
+    <Compile Include="Lua\3rd\pblua\NFMsgPreGame_pb.lua" />
+    <Compile Include="Lua\3rd\pblua\NFMsgShare_pb.lua" />
+    <Compile Include="Lua\3rd\pblua\NFMsgURl_pb.lua" />
+    <Compile Include="Lua\3rd\pblua\NFSLGDefine_pb.lua" />
     <Compile Include="Lua\3rd\pblua\person_pb.lua" />
     <Compile Include="Lua\3rd\sproto\print_r.lua" />
     <Compile Include="Lua\3rd\sproto\sproto.lua" />

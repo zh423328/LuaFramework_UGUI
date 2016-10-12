@@ -32,7 +32,7 @@ end
 
 --初始化完成，发送链接服务器信息--
 function Game.OnInitOK()
-    AppConst.SocketPort = 2012;
+    AppConst.SocketPort = 14001;
     AppConst.SocketAddress = "127.0.0.1";
     networkMgr:SendConnect();
 
@@ -52,8 +52,8 @@ function Game.OnInitOK()
     --TestClass.TestFun();
     --logError("error str");
     CtrlManager.Init();
-    --local ctrl = CtrlManager.GetCtrl(CtrlNames.Login);
-    local ctrl = CtrlManager.GetCtrl(CtrlNames.Prompt);
+    local ctrl = CtrlManager.GetCtrl(CtrlNames.Login);
+    --local ctrl = CtrlManager.GetCtrl(CtrlNames.Prompt);
     if ctrl ~= nil then
         ctrl:Awake();
         log("login open");
