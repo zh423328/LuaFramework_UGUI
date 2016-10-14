@@ -58,13 +58,11 @@ Temp/
 *_i.c
 *_p.c
 *.ilk
-*.meta
 *.obj
 *.pch
 *.pdb
 *.pgc
 *.pgd
-*.rsp
 *.sbr
 *.tlb
 *.tli

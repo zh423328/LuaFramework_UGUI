@@ -1,0 +1,321 @@
+fileFormatVersion: 2
+guid: 10797743d99bf83428f1085e1dc0a64a
+timeCreated: 1474968447
+licenseType: Pro
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: boy1
+    21300002: denglu
+    21300004: denglumima
+    21300006: girl1
+    21300008: gonggao
+    21300010: jizhumima
+    21300012: nicheng-x
+    21300014: nicheng
+    21300016: xingbie
+    21300018: xingming
+    21300020: xuanzequan1
+    21300022: youxizhanghao
+    21300024: zhaohuimima-on
+    21300026: zhaohuimima
+    21300028: zhucexinhao-on
+    21300030: zhucexinhao
+    21300032: zhuyi
+    21300034: dengluyouxi
+    21300036: gou
+    21300038: kuang
+    21300040: mimakuang
+    21300042: qurenmima
+    21300044: tongyizhuce
+    21300046: xieyi
+    21300048: yiyouzhanghao
+    21300050: yonghuxieyi
+    21300052: zhuce
+    21300054: shurukuang
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: -1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: denglu
+      rect:
+        serializedVersion: 2
+        x: 899
+        y: 974
+        width: 98
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: denglumima
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 173
+        width: 152
+        height: 35
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: dengluyouxi
+      rect:
+        serializedVersion: 2
+        x: 864
+        y: 348
+        width: 158
+        height: 73
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: gonggao
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 380
+        width: 684
+        height: 41
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: gou
+      rect:
+        serializedVersion: 2
+        x: 959
+        y: 879
+        width: 43
+        height: 44
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: jizhumima
+      rect:
+        serializedVersion: 2
+        x: 715
+        y: 294
+        width: 138
+        height: 35
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: kuang
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 423
+        width: 895
+        height: 599
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: mimakuang
+      rect:
+        serializedVersion: 2
+        x: 899
+        y: 865
+        width: 58
+        height: 58
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: qurenmima
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 136
+        width: 152
+        height: 35
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: shurukuang
+      rect:
+        serializedVersion: 2
+        x: 162
+        y: 335
+        width: 392
+        height: 43
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: tongyizhuce
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 273
+        width: 158
+        height: 73
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: xieyi
+      rect:
+        serializedVersion: 2
+        x: 688
+        y: 372
+        width: 174
+        height: 49
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: yiyouzhanghao
+      rect:
+        serializedVersion: 2
+        x: 556
+        y: 297
+        width: 157
+        height: 73
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: yonghuxieyi
+      rect:
+        serializedVersion: 2
+        x: 715
+        y: 331
+        width: 141
+        height: 39
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: youxizhanghao
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 99
+        width: 151
+        height: 35
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: zhaohuimima
+      rect:
+        serializedVersion: 2
+        x: 858
+        y: 285
+        width: 153
+        height: 61
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: zhuce
+      rect:
+        serializedVersion: 2
+        x: 899
+        y: 925
+        width: 97
+        height: 47
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: zhucexinhao
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 210
+        width: 153
+        height: 61
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
