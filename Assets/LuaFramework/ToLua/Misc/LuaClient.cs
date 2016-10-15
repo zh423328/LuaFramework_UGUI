@@ -25,7 +25,9 @@ using LuaInterface;
 using System.Collections;
 using System.IO;
 using System;
+#if UNITY_5
 using UnityEngine.SceneManagement;
+#endif
 
 public class LuaClient : MonoBehaviour
 {
@@ -44,7 +46,7 @@ public class LuaClient : MonoBehaviour
 
     protected virtual LuaFileUtils InitLoader()
     {
-        if(LuaFileUtils.Instance != null)
+        if (LuaFileUtils.Instance != null)
         {
             return LuaFileUtils.Instance;
         }
@@ -66,12 +68,12 @@ public class LuaClient : MonoBehaviour
         luaState.OpenLibs(LuaDLL.luaopen_bit);
 #endif
 
-        if(LuaConst.openLuaSocket)
+        if (LuaConst.openLuaSocket)
         {
-            OpenLuaSocket();
-        }
+            OpenLuaSocket();            
+        }        
 
-        if(LuaConst.openZbsDebugger)
+        if (LuaConst.openZbsDebugger)
         {
             OpenZbsDebugger();
         }
@@ -79,18 +81,18 @@ public class LuaClient : MonoBehaviour
 
     public void OpenZbsDebugger(string ip = "localhost")
     {
-        if(!Directory.Exists(LuaConst.zbsDir))
+        if (!Directory.Exists(LuaConst.zbsDir))
         {
             Debugger.LogWarning("ZeroBraneStudio not install or LuaConst.zbsDir not right");
             return;
         }
 
-        if(!LuaConst.openLuaSocket)
-        {
+        if (!LuaConst.openLuaSocket)
+        {                            
             OpenLuaSocket();
         }
 
-        if(!string.IsNullOrEmpty(LuaConst.zbsDir))
+        if (!string.IsNullOrEmpty(LuaConst.zbsDir))
         {
             luaState.AddSearchPath(LuaConst.zbsDir);
         }
@@ -100,7 +102,7 @@ public class LuaClient : MonoBehaviour
 
     [MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
     static int LuaOpen_Socket_Core(IntPtr L)
-    {
+    {        
         return LuaDLL.luaopen_socket_core(L);
     }
 
@@ -113,10 +115,11 @@ public class LuaClient : MonoBehaviour
     protected void OpenLuaSocket()
     {
         LuaConst.openLuaSocket = true;
+
         luaState.BeginPreLoad();
         luaState.RegFunction("socket.core", LuaOpen_Socket_Core);
-        luaState.RegFunction("mime.core", LuaOpen_Mime_Core);
-        luaState.EndPreLoad();
+        luaState.RegFunction("mime.core", LuaOpen_Mime_Core);                
+        luaState.EndPreLoad();                     
     }
 
     //cjson 比较特殊，只new了一个table，没有注册库，这里注册一下
@@ -125,8 +128,9 @@ public class LuaClient : MonoBehaviour
         luaState.LuaGetField(LuaIndexes.LUA_REGISTRYINDEX, "_LOADED");
         luaState.OpenLibs(LuaDLL.luaopen_cjson);
         luaState.LuaSetField(-2, "cjson");
+
         luaState.OpenLibs(LuaDLL.luaopen_cjson_safe);
-        luaState.LuaSetField(-2, "cjson.safe");
+        luaState.LuaSetField(-2, "cjson.safe");                               
     }
 
     protected virtual void CallMain()
@@ -134,7 +138,7 @@ public class LuaClient : MonoBehaviour
         LuaFunction main = luaState.GetFunction("Main");
         main.Call();
         main.Dispose();
-        main = null;
+        main = null;                
     }
 
     protected virtual void StartMain()
@@ -151,28 +155,29 @@ public class LuaClient : MonoBehaviour
     }
 
     protected virtual void Bind()
-    {
+    {        
         LuaBinder.Bind(luaState);
         LuaCoroutine.Register(luaState, this);
     }
 
     protected void Init()
-    {
+    {        
         InitLoader();
         luaState = new LuaState();
         OpenLibs();
         luaState.LuaSetTop(0);
         Bind();
-        LoadLuaFiles();
+        LoadLuaFiles();    
     }
 
     protected void Awake()
     {
         Instance = this;
         Init();
+
 #if UNITY_5_4
         SceneManager.sceneLoaded += OnSceneLoaded;
-#endif
+#endif        
     }
 
     protected virtual void OnLoadFinished()
@@ -184,12 +189,18 @@ public class LuaClient : MonoBehaviour
 
     void OnLevelLoaded(int level)
     {
-        if(levelLoaded != null)
+        if (levelLoaded != null)
         {
             levelLoaded.BeginPCall();
             levelLoaded.Push(level);
             levelLoaded.PCall();
             levelLoaded.EndPCall();
+        }
+
+        if (luaState != null)
+        {
+            //luaState.LuaGC(LuaGCOptions.LUA_GCCOLLECT);
+            luaState.RefreshDelegateMap();
         }
     }
 
@@ -207,27 +218,27 @@ public class LuaClient : MonoBehaviour
 
     public virtual void Destroy()
     {
-        if(luaState != null)
+        if (luaState != null)
         {
 #if UNITY_5_4
-            SceneManager.sceneLoaded -= OnSceneLoaded;
-#endif
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+#endif    
             LuaState state = luaState;
             luaState = null;
 
-            if(levelLoaded != null)
+            if (levelLoaded != null)
             {
                 levelLoaded.Dispose();
                 levelLoaded = null;
             }
 
-            if(loop != null)
+            if (loop != null)
             {
                 loop.Destroy();
                 loop = null;
             }
 
-            state.Dispose();
+            state.Dispose();            
             Instance = null;
         }
     }
