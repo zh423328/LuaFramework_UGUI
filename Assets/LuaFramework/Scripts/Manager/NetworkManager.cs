@@ -113,7 +113,8 @@ namespace LuaFramework
         {
             NFMsg.MsgBase xData = new NFMsg.MsgBase();
             xData.player_id = Util.NFToPB(mMainID);
-            xData.msg_data = buffer.ToBytes();
+            ByteBuffer newbuffer = new ByteBuffer(buffer.ToBytes());
+            xData.msg_data = newbuffer.ReadBytes();
             MemoryStream body = new MemoryStream();
             Serializer.Serialize<NFMsg.MsgBase>(body, xData);
             MsgHead head = new MsgHead();
@@ -126,6 +127,7 @@ namespace LuaFramework
             bodyByte.CopyTo(sendBytes, headByte.Length);
             SocketClient.SendMessage(sendBytes);
             buffer.Close();
+            newbuffer.Close();
         }
 
         /// <summary>

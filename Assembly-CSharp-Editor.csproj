@@ -67,7 +67,11 @@
      <Compile Include="Assets\LuaFramework\ToLua\Editor\ToLuaTree.cs" />
      <None Include="Assets\3rd Tools\GenBabeluaApi\readme.txt" />
      <None Include="Assets\codeandweb.com\Editor\SettingsTexturePackerImporter.txt" />
+     <None Include="Assets\LuaFramework\Resources\Shader\Button.shader" />
+     <None Include="Assets\StreamingAssets\files.txt" />
+     <None Include="Assets\LuaFramework\Resources\Shader\Default No-Alpha.shader" />
      <None Include="Assets\LuaFramework\Scripts\ProtoCS\protobuf-net\Web\TODO.txt" />
+     <None Include="Assets\LuaFramework\Resources\Shader\Gray.shader" />
      <None Include="Assets\LuaFramework\ToLua\readme.txt" />
      <None Include="Assets\codeandweb.com\Readme.txt" />
  <Reference Include="UnityEditor.Advertisements">

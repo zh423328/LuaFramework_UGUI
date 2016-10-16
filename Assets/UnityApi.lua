@@ -8876,414 +8876,6 @@ MeshRenderer.name = nil
 -- property: HideFlags MeshRenderer.hideFlags	get	set	
 MeshRenderer.hideFlags = nil 
 --*
-ParticleEmitter = {} 
---*
---[Comment]
--- property: Boolean ParticleEmitter.emit	get	set	
---Should particles be automatically emitted each frame?
-ParticleEmitter.emit = nil 
---*
---[Comment]
--- property: Single ParticleEmitter.minSize	get	set	
---The minimum size each particle can be at the time when it is spawned.
-ParticleEmitter.minSize = nil 
---*
---[Comment]
--- property: Single ParticleEmitter.maxSize	get	set	
---The maximum size each particle can be at the time when it is spawned.
-ParticleEmitter.maxSize = nil 
---*
---[Comment]
--- property: Single ParticleEmitter.minEnergy	get	set	
---The minimum lifetime of each particle, measured in seconds.
-ParticleEmitter.minEnergy = nil 
---*
---[Comment]
--- property: Single ParticleEmitter.maxEnergy	get	set	
---The maximum lifetime of each particle, measured in seconds.
-ParticleEmitter.maxEnergy = nil 
---*
---[Comment]
--- property: Single ParticleEmitter.minEmission	get	set	
---The minimum number of particles that will be spawned every second.
-ParticleEmitter.minEmission = nil 
---*
---[Comment]
--- property: Single ParticleEmitter.maxEmission	get	set	
---The maximum number of particles that will be spawned every second.
-ParticleEmitter.maxEmission = nil 
---*
---[Comment]
--- property: Single ParticleEmitter.emitterVelocityScale	get	set	
---The amount of the emitter's speed that the particles inherit.
-ParticleEmitter.emitterVelocityScale = nil 
---*
---[Comment]
--- property: Vector3 ParticleEmitter.worldVelocity	get	set	
---The starting speed of particles in world space, along X, Y, and Z.
-ParticleEmitter.worldVelocity = nil 
---*
---[Comment]
--- property: Vector3 ParticleEmitter.localVelocity	get	set	
---The starting speed of particles along X, Y, and Z, measured in the object's orientation.
-ParticleEmitter.localVelocity = nil 
---*
---[Comment]
--- property: Vector3 ParticleEmitter.rndVelocity	get	set	
---A random speed along X, Y, and Z that is added to the velocity.
-ParticleEmitter.rndVelocity = nil 
---*
---[Comment]
--- property: Boolean ParticleEmitter.useWorldSpace	get	set	
---If enabled, the particles don't move when the emitter moves. If false, when you move the emitter, the particles follow it around.
-ParticleEmitter.useWorldSpace = nil 
---*
---[Comment]
--- property: Boolean ParticleEmitter.rndRotation	get	set	
---If enabled, the particles will be spawned with random rotations.
-ParticleEmitter.rndRotation = nil 
---*
---[Comment]
--- property: Single ParticleEmitter.angularVelocity	get	set	
---The angular velocity of new particles in degrees per second.
-ParticleEmitter.angularVelocity = nil 
---*
---[Comment]
--- property: Single ParticleEmitter.rndAngularVelocity	get	set	
---A random angular velocity modifier for new particles.
-ParticleEmitter.rndAngularVelocity = nil 
---*
---[Comment]
--- property: Particle[] ParticleEmitter.particles	get	set	
---Returns a copy of all particles and assigns an array of all particles to be the current particles.
-ParticleEmitter.particles = nil 
---*
---[Comment]
--- property: Int32 ParticleEmitter.particleCount	get	
---The current number of particles (Read Only).
-ParticleEmitter.particleCount = nil 
---*
---[Comment]
--- property: Boolean ParticleEmitter.enabled	get	set	
---Turns the ParticleEmitter on or off.
-ParticleEmitter.enabled = nil 
---*
---[Comment]
--- property: Transform ParticleEmitter.transform	get	
-ParticleEmitter.transform = nil 
---*
---[Comment]
--- property: GameObject ParticleEmitter.gameObject	get	
-ParticleEmitter.gameObject = nil 
---*
---[Comment]
--- property: String ParticleEmitter.tag	get	set	
-ParticleEmitter.tag = nil 
---*
---[Comment]
--- property: String ParticleEmitter.name	get	set	
-ParticleEmitter.name = nil 
---*
---[Comment]
--- property: HideFlags ParticleEmitter.hideFlags	get	set	
-ParticleEmitter.hideFlags = nil 
---*
---[Comment]
---overrides:
---*
---Void ClearParticles()
---Removes all particles from the particle emitter.
---*
---no static method,use ':'
-function ParticleEmitter:ClearParticles() end 
-
---[Comment]
---overrides:
---*
---Void Emit()
---Emit a number of particles.
---*
---Void Emit(Int32 count)
---Emit count particles immediately.
---*
---Void Emit(Vector3 pos,Vector3 velocity,Single size,Single energy,Color color)
---Emit a single particle with given parameters.
---params:
---pos:    The position of the particle.
---velocity:    The velocity of the particle.
---size:    The size of the particle.
---energy:    The remaining lifetime of the particle.
---color:    The color of the particle.
-
---*
---Void Emit(Vector3 pos,Vector3 velocity,Single size,Single energy,Color color,Single rotation,Single angularVelocity)
---
---params:
---rotation:    The initial rotation of the particle in degrees.
---angularVelocity:    The angular velocity of the particle in degrees per second.
-
---*
---no static method,use ':'
-function ParticleEmitter:Emit() end 
-
---[Comment]
---overrides:
---*
---Void Simulate(Single deltaTime)
---Advance particle simulation by given time.
---*
---no static method,use ':'
-function ParticleEmitter:Simulate() end 
-
-ParticleRenderer = {} 
---*
---[Comment]
---consturctor for ParticleRenderer overrides:
---*
---ParticleRenderer.New()
---*
-
-function ParticleRenderer.New() end
---*
---[Comment]
--- property: ParticleRenderMode ParticleRenderer.particleRenderMode	get	set	
---How particles are drawn.
-ParticleRenderer.particleRenderMode = nil 
---*
---[Comment]
--- property: Single ParticleRenderer.lengthScale	get	set	
---How much are the particles stretched in their direction of motion.
-ParticleRenderer.lengthScale = nil 
---*
---[Comment]
--- property: Single ParticleRenderer.velocityScale	get	set	
---How much are the particles strectched depending on "how fast they move".
-ParticleRenderer.velocityScale = nil 
---*
---[Comment]
--- property: Single ParticleRenderer.cameraVelocityScale	get	set	
---How much are the particles strected depending on the Camera's speed.
-ParticleRenderer.cameraVelocityScale = nil 
---*
---[Comment]
--- property: Single ParticleRenderer.maxParticleSize	get	set	
---Clamp the maximum particle size.
-ParticleRenderer.maxParticleSize = nil 
---*
---[Comment]
--- property: Int32 ParticleRenderer.uvAnimationXTile	get	set	
---Set horizontal tiling count.
-ParticleRenderer.uvAnimationXTile = nil 
---*
---[Comment]
--- property: Int32 ParticleRenderer.uvAnimationYTile	get	set	
---Set vertical tiling count.
-ParticleRenderer.uvAnimationYTile = nil 
---*
---[Comment]
--- property: Single ParticleRenderer.uvAnimationCycles	get	set	
---Set uv animation cycles.
-ParticleRenderer.uvAnimationCycles = nil 
---*
---[Comment]
--- property: Single ParticleRenderer.maxPartileSize	get	set	
-ParticleRenderer.maxPartileSize = nil 
---*
---[Comment]
--- property: Rect[] ParticleRenderer.uvTiles	get	set	
-ParticleRenderer.uvTiles = nil 
---*
---[Comment]
--- property: Boolean ParticleRenderer.isPartOfStaticBatch	get	
-ParticleRenderer.isPartOfStaticBatch = nil 
---*
---[Comment]
--- property: Matrix4x4 ParticleRenderer.worldToLocalMatrix	get	
-ParticleRenderer.worldToLocalMatrix = nil 
---*
---[Comment]
--- property: Matrix4x4 ParticleRenderer.localToWorldMatrix	get	
-ParticleRenderer.localToWorldMatrix = nil 
---*
---[Comment]
--- property: Boolean ParticleRenderer.enabled	get	set	
-ParticleRenderer.enabled = nil 
---*
---[Comment]
--- property: ShadowCastingMode ParticleRenderer.shadowCastingMode	get	set	
-ParticleRenderer.shadowCastingMode = nil 
---*
---[Comment]
--- property: Boolean ParticleRenderer.receiveShadows	get	set	
-ParticleRenderer.receiveShadows = nil 
---*
---[Comment]
--- property: Material ParticleRenderer.material	get	set	
-ParticleRenderer.material = nil 
---*
---[Comment]
--- property: Material ParticleRenderer.sharedMaterial	get	set	
-ParticleRenderer.sharedMaterial = nil 
---*
---[Comment]
--- property: Material[] ParticleRenderer.materials	get	set	
-ParticleRenderer.materials = nil 
---*
---[Comment]
--- property: Material[] ParticleRenderer.sharedMaterials	get	set	
-ParticleRenderer.sharedMaterials = nil 
---*
---[Comment]
--- property: Bounds ParticleRenderer.bounds	get	
-ParticleRenderer.bounds = nil 
---*
---[Comment]
--- property: Int32 ParticleRenderer.lightmapIndex	get	set	
-ParticleRenderer.lightmapIndex = nil 
---*
---[Comment]
--- property: Int32 ParticleRenderer.realtimeLightmapIndex	get	set	
-ParticleRenderer.realtimeLightmapIndex = nil 
---*
---[Comment]
--- property: Vector4 ParticleRenderer.lightmapScaleOffset	get	set	
-ParticleRenderer.lightmapScaleOffset = nil 
---*
---[Comment]
--- property: Boolean ParticleRenderer.motionVectors	get	set	
-ParticleRenderer.motionVectors = nil 
---*
---[Comment]
--- property: Vector4 ParticleRenderer.realtimeLightmapScaleOffset	get	set	
-ParticleRenderer.realtimeLightmapScaleOffset = nil 
---*
---[Comment]
--- property: Boolean ParticleRenderer.isVisible	get	
-ParticleRenderer.isVisible = nil 
---*
---[Comment]
--- property: LightProbeUsage ParticleRenderer.lightProbeUsage	get	set	
-ParticleRenderer.lightProbeUsage = nil 
---*
---[Comment]
--- property: GameObject ParticleRenderer.lightProbeProxyVolumeOverride	get	set	
-ParticleRenderer.lightProbeProxyVolumeOverride = nil 
---*
---[Comment]
--- property: Transform ParticleRenderer.probeAnchor	get	set	
-ParticleRenderer.probeAnchor = nil 
---*
---[Comment]
--- property: ReflectionProbeUsage ParticleRenderer.reflectionProbeUsage	get	set	
-ParticleRenderer.reflectionProbeUsage = nil 
---*
---[Comment]
--- property: String ParticleRenderer.sortingLayerName	get	set	
-ParticleRenderer.sortingLayerName = nil 
---*
---[Comment]
--- property: Int32 ParticleRenderer.sortingLayerID	get	set	
-ParticleRenderer.sortingLayerID = nil 
---*
---[Comment]
--- property: Int32 ParticleRenderer.sortingOrder	get	set	
-ParticleRenderer.sortingOrder = nil 
---*
---[Comment]
--- property: Transform ParticleRenderer.transform	get	
-ParticleRenderer.transform = nil 
---*
---[Comment]
--- property: GameObject ParticleRenderer.gameObject	get	
-ParticleRenderer.gameObject = nil 
---*
---[Comment]
--- property: String ParticleRenderer.tag	get	set	
-ParticleRenderer.tag = nil 
---*
---[Comment]
--- property: String ParticleRenderer.name	get	set	
-ParticleRenderer.name = nil 
---*
---[Comment]
--- property: HideFlags ParticleRenderer.hideFlags	get	set	
-ParticleRenderer.hideFlags = nil 
---*
-ParticleAnimator = {} 
---*
---[Comment]
---consturctor for ParticleAnimator overrides:
---*
---ParticleAnimator.New()
---*
-
-function ParticleAnimator.New() end
---*
---[Comment]
--- property: Boolean ParticleAnimator.doesAnimateColor	get	set	
---Do particles cycle their color over their lifetime?
-ParticleAnimator.doesAnimateColor = nil 
---*
---[Comment]
--- property: Vector3 ParticleAnimator.worldRotationAxis	get	set	
---World space axis the particles rotate around.
-ParticleAnimator.worldRotationAxis = nil 
---*
---[Comment]
--- property: Vector3 ParticleAnimator.localRotationAxis	get	set	
---Local space axis the particles rotate around.
-ParticleAnimator.localRotationAxis = nil 
---*
---[Comment]
--- property: Single ParticleAnimator.sizeGrow	get	set	
---How the particle sizes grow over their lifetime.
-ParticleAnimator.sizeGrow = nil 
---*
---[Comment]
--- property: Vector3 ParticleAnimator.rndForce	get	set	
---A random force added to particles every frame.
-ParticleAnimator.rndForce = nil 
---*
---[Comment]
--- property: Vector3 ParticleAnimator.force	get	set	
---The force being applied to particles every frame.
-ParticleAnimator.force = nil 
---*
---[Comment]
--- property: Single ParticleAnimator.damping	get	set	
---How much particles are slowed down every frame.
-ParticleAnimator.damping = nil 
---*
---[Comment]
--- property: Boolean ParticleAnimator.autodestruct	get	set	
---Does the GameObject of this particle animator auto destructs?
-ParticleAnimator.autodestruct = nil 
---*
---[Comment]
--- property: Color[] ParticleAnimator.colorAnimation	get	set	
---Colors the particles will cycle through over their lifetime.
-ParticleAnimator.colorAnimation = nil 
---*
---[Comment]
--- property: Transform ParticleAnimator.transform	get	
-ParticleAnimator.transform = nil 
---*
---[Comment]
--- property: GameObject ParticleAnimator.gameObject	get	
-ParticleAnimator.gameObject = nil 
---*
---[Comment]
--- property: String ParticleAnimator.tag	get	set	
-ParticleAnimator.tag = nil 
---*
---[Comment]
--- property: String ParticleAnimator.name	get	set	
-ParticleAnimator.name = nil 
---*
---[Comment]
--- property: HideFlags ParticleAnimator.hideFlags	get	set	
-ParticleAnimator.hideFlags = nil 
---*
 BoxCollider = {} 
 --*
 --[Comment]
@@ -11494,6 +11086,14 @@ function Util.CallMethod() end
 --static method,use '.'
 function Util.CheckEnvironment() end 
 
+--[Comment]
+--overrides:
+--*
+--Ident NFToPB(NFGUID xID)
+--*
+--static method,use '.'
+function Util.NFToPB() end 
+
 AppConst = {} 
 --*
 --[Comment]
@@ -11549,6 +11149,14 @@ function LuaHelper.GetNetManager() end
 --*
 --static method,use '.'
 function LuaHelper.GetSoundManager() end 
+
+--[Comment]
+--overrides:
+--*
+--AsyncOperationMgr GetAsyncOperationMgr()
+--*
+--static method,use '.'
+function LuaHelper.GetAsyncOperationMgr() end 
 
 --[Comment]
 --overrides:
@@ -11756,6 +11364,10 @@ LuaBehaviour = {}
 --*
 
 function LuaBehaviour.New() end
+--*
+--[Comment]
+-- property: String LuaBehaviour.ABName	get	set	
+LuaBehaviour.ABName = nil 
 --*
 --[Comment]
 -- property: Boolean LuaBehaviour.useGUILayout	get	set	
@@ -11998,7 +11610,7 @@ PanelManager.hideFlags = nil
 --[Comment]
 --overrides:
 --*
---Void CreatePanel(String name,LuaFunction func)
+--Void CreatePanel(String name,String assetName,LuaFunction func)
 --*
 --no static method,use ':'
 function PanelManager:CreatePanel() end 
@@ -12322,10 +11934,10 @@ function NetworkManager:SendConnect() end
 --[Comment]
 --overrides:
 --*
---Void SendMessage(ByteBuffer buffer)
+--Void SendMsg(Int32 uMsgID,ByteBuffer buffer)
 --*
 --no static method,use ':'
-function NetworkManager:SendMessage() end 
+function NetworkManager:SendMsg() end 
 
 ResourceManager = {} 
 --*
@@ -12397,97 +12009,107 @@ function ResourceManager:LoadPrefab() end
 --no static method,use ':'
 function ResourceManager:UnloadAssetBundle() end 
 
-TestClass = {} 
---*
---[Comment]
---consturctor for TestClass overrides:
---*
---TestClass.New()
---*
-
-function TestClass.New() end
---*
 --[Comment]
 --overrides:
 --*
---Void TestFun()
+--Void ChangeScene(String newsceneName,String abName,Boolean isAsync)
 --*
---static method,use '.'
-function TestClass.TestFun() end 
-
-LoggerHelper = {} 
---*
---[Comment]
---consturctor for LoggerHelper overrides:
---*
---LoggerHelper.New()
---*
-
-function LoggerHelper.New() end
---*
---[Comment]
---overrides:
---*
---Void Release()
---*
---static method,use '.'
-function LoggerHelper.Release() end 
+--no static method,use ':'
+function ResourceManager:ChangeScene() end 
 
 --[Comment]
 --overrides:
 --*
---Void UploadLogFile()
+--Void CloseScene(String sceneName)
 --*
---static method,use '.'
-function LoggerHelper.UploadLogFile() end 
+--no static method,use ':'
+function ResourceManager:CloseScene() end 
 
 --[Comment]
 --overrides:
 --*
---Void Debug(Object message,Boolean isShowStack,Int32 user)
+--Boolean LoadScene(String sceneName,String abName,Boolean isAdd)
 --*
---Void Debug(String filter,Object message,Boolean isShowStack)
---*
---static method,use '.'
-function LoggerHelper.Debug() end 
+--no static method,use ':'
+function ResourceManager:LoadScene() end 
 
 --[Comment]
 --overrides:
 --*
---Void Info(Object message,Boolean isShowStack)
+--Boolean LoadSceneAsync(String sceneName,String abName,Boolean isAdd,Action`1 onProcess,Boolean isLoadedActive)
 --*
---static method,use '.'
-function LoggerHelper.Info() end 
+--no static method,use ':'
+function ResourceManager:LoadSceneAsync() end 
+
+NFGUID = {} 
+--*
+--[Comment]
+--consturctor for NFGUID overrides:
+--*
+--NFGUID.New()
+--*
+
+--NFGUID.New(NFGUID id)
+--*
+
+--NFGUID.New(Int64 nHead,Int64 nData)
+--*
+
+function NFGUID.New() end
+--*
+--[Comment]
+--overrides:
+--*
+--Boolean Equals(Object other)
+--*
+--no static method,use ':'
+function NFGUID:Equals() end 
 
 --[Comment]
 --overrides:
 --*
---Void Warning(Object message,Boolean isShowStack)
+--Boolean IsNull()
 --*
---static method,use '.'
-function LoggerHelper.Warning() end 
+--no static method,use ':'
+function NFGUID:IsNull() end 
 
 --[Comment]
 --overrides:
 --*
---Void Error(Object message,Boolean isShowStack)
+--String ToString()
 --*
---static method,use '.'
-function LoggerHelper.Error() end 
+--no static method,use ':'
+function NFGUID:ToString() end 
 
 --[Comment]
 --overrides:
 --*
---Void Critical(Object message,Boolean isShowStack)
+--Boolean Parse(String strData,NFGUID& id)
 --*
---static method,use '.'
-function LoggerHelper.Critical() end 
+--no static method,use ':'
+function NFGUID:Parse() end 
 
 --[Comment]
 --overrides:
 --*
---Void Except(Exception ex,Object message)
+--Int32 GetHashCode()
+--*
+--no static method,use ':'
+function NFGUID:GetHashCode() end 
+
+--[Comment]
+--overrides:
+--*
+--Boolean op_Equality(NFGUID ident,NFGUID other)
 --*
 --static method,use '.'
-function LoggerHelper.Except() end 
+function NFGUID.op_Equality() end 
+
+--[Comment]
+--overrides:
+--*
+--Boolean op_Inequality(NFGUID ident,NFGUID other)
+--*
+--static method,use '.'
+function NFGUID.op_Inequality() end 
 

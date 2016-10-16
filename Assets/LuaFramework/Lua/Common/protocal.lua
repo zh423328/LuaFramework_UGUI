@@ -1,9 +1,9 @@
 --Buildin Table
 Protocal = {
-	Connect		= '101';	--连接服务器
-	Exception   = '102';	--异常掉线
-	Disconnect  = '103';	--正常断线   
-	Message		= '104';	--接收消息
+	Connect		= '61';	--连接服务器
+	Exception   = '62';	--异常掉线
+	Disconnect  = '63';	--正常断线   
+	Message		= '64';	--接收消息
 }
 
 

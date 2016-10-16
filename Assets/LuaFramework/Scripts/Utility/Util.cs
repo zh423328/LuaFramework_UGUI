@@ -436,5 +436,12 @@ namespace LuaFramework
             xIdent.index = xID.nData64;
             return xIdent;
         }
+
+        public static LuaByteBuffer FilterNoMsgBase(ByteBuffer buffer)
+        {
+            NFMsg.MsgBase xMsg = new NFMsg.MsgBase();
+            xMsg = ProtoBuf.Serializer.Deserialize<NFMsg.MsgBase>(new MemoryStream(buffer.ReadBytes()));
+            return new LuaByteBuffer(xMsg.msg_data);
+        }
     }
 }

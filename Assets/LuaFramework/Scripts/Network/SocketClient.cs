@@ -6,6 +6,7 @@ using System.Net.Sockets;
 using System.Collections;
 using System.Collections.Generic;
 using LuaFramework;
+using System.Runtime.InteropServices;
 
 public enum DisType
 {
@@ -90,8 +91,8 @@ public class SocketClient
         {
             ms.Position = 0;
             BinaryWriter writer = new BinaryWriter(ms);
-            ushort msglen = (ushort)message.Length;
-            writer.Write(msglen);
+            //ushort msglen = (ushort)message.Length;
+            //writer.Write(msglen);
             writer.Write(message);
             writer.Flush();
 
@@ -198,23 +199,24 @@ public class SocketClient
         //Reset to beginning
         memStream.Seek(0, SeekOrigin.Begin);
 
-        while(RemainingBytes() > 2)
+        while(RemainingBytes() >= ConstDefine.NF_PACKET_HEAD_SIZE)
         {
-            ushort messageLen = reader.ReadUInt16();
+            object structType = new MsgHead();
+            byte[] headBytes = new byte[Marshal.SizeOf(structType)];
+            Int32 msgheeadlen = Marshal.SizeOf(structType);
+            Array.Copy(reader.ReadBytes(msgheeadlen), 0, headBytes, 0, msgheeadlen);
+            StructureTransform.ByteArrayToStructureEndian(headBytes, ref structType, 0);
+            MsgHead head = (MsgHead)structType;
+            int datalen = (int)head.unDataLen - ConstDefine.NF_PACKET_HEAD_SIZE;
 
-            if(RemainingBytes() >= messageLen)
+            if(RemainingBytes() >= datalen)
             {
                 MemoryStream ms = new MemoryStream();
                 BinaryWriter writer = new BinaryWriter(ms);
-                writer.Write(reader.ReadBytes(messageLen));
+                writer.Write(datalen);
+                writer.Write(reader.ReadBytes(datalen));
                 ms.Seek(0, SeekOrigin.Begin);
-                OnReceivedMessage(ms);
-            }
-            else
-            {
-                //Back up the position two bytes
-                memStream.Position = memStream.Position - 2;
-                break;
+                OnReceivedMessage(head.unMsgID, ms);
             }
         }
 
@@ -236,14 +238,12 @@ public class SocketClient
     /// 接收到消息
     /// </summary>
     /// <param name="ms"></param>
-    void OnReceivedMessage(MemoryStream ms)
+    void OnReceivedMessage(int unMsgID, MemoryStream ms)
     {
         BinaryReader r = new BinaryReader(ms);
         byte[] message = r.ReadBytes((int)(ms.Length - ms.Position));
-        //int msglen = message.Length;
         ByteBuffer buffer = new ByteBuffer(message);
-        int mainId = buffer.ReadShort();
-        NetworkManager.AddEvent(mainId, buffer);
+        NetworkManager.AddEvent(unMsgID, buffer);
     }
 
 

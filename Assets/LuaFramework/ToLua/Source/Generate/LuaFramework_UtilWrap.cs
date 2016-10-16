@@ -29,6 +29,7 @@ public class LuaFramework_UtilWrap
 		L.RegFunction("CallMethod", CallMethod);
 		L.RegFunction("CheckEnvironment", CheckEnvironment);
 		L.RegFunction("NFToPB", NFToPB);
+		L.RegFunction("FilterNoMsgBase", FilterNoMsgBase);
 		L.RegFunction("New", _CreateLuaFramework_Util);
 		L.RegFunction("__tostring", ToLua.op_ToString);
 		L.RegVar("DataPath", get_DataPath, null);
@@ -469,6 +470,23 @@ public class LuaFramework_UtilWrap
 			LuaFramework.NFGUID arg0 = (LuaFramework.NFGUID)ToLua.CheckObject(L, 1, typeof(LuaFramework.NFGUID));
 			NFMsg.Ident o = LuaFramework.Util.NFToPB(arg0);
 			ToLua.PushObject(L, o);
+			return 1;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int FilterNoMsgBase(IntPtr L)
+	{
+		try
+		{
+			ToLua.CheckArgsCount(L, 1);
+			LuaFramework.ByteBuffer arg0 = (LuaFramework.ByteBuffer)ToLua.CheckObject(L, 1, typeof(LuaFramework.ByteBuffer));
+			LuaInterface.LuaByteBuffer o = LuaFramework.Util.FilterNoMsgBase(arg0);
+			ToLua.Push(L, o);
 			return 1;
 		}
 		catch(Exception e)

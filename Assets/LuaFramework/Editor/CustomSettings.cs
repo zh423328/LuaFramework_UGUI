@@ -111,9 +111,9 @@ public static class CustomSettings
         _GT(typeof(Space)),
 
         _GT(typeof(MeshRenderer)),
-        _GT(typeof(ParticleEmitter)),
-        _GT(typeof(ParticleRenderer)),
-        _GT(typeof(ParticleAnimator)),
+        //_GT(typeof(ParticleSystem)),
+        //_GT(typeof(ParticleRenderer)),
+        // _GT(typeof(ParticleAnimator)),
 
         _GT(typeof(BoxCollider)),
         _GT(typeof(MeshCollider)),

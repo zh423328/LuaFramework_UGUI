@@ -48,9 +48,6 @@ public static class LuaBinder
 		UnityEngine_SkinnedMeshRendererWrap.Register(L);
 		UnityEngine_SpaceWrap.Register(L);
 		UnityEngine_MeshRendererWrap.Register(L);
-		UnityEngine_ParticleEmitterWrap.Register(L);
-		UnityEngine_ParticleRendererWrap.Register(L);
-		UnityEngine_ParticleAnimatorWrap.Register(L);
 		UnityEngine_BoxColliderWrap.Register(L);
 		UnityEngine_MeshColliderWrap.Register(L);
 		UnityEngine_SphereColliderWrap.Register(L);

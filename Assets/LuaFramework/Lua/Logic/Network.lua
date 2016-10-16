@@ -23,11 +23,13 @@ function Network.Start()
     Event.AddListener(Protocal.Connect, this.OnConnect); 
     Event.AddListener(Protocal.Message, this.OnMessage); 
     Event.AddListener(Protocal.Exception, this.OnException); 
-    Event.AddListener(Protocal.Disconnect, this.OnDisconnect); 
+    Event.AddListener(Protocal.Disconnect, this.OnDisconnect);
+    Event.AddListener(tostring(NFDefine_pb.EGMI_ACK_LOGIN), this.OnLoginResult);  
 end
 
 --Socket消息--
 function Network.OnSocket(key, data)
+    log("key value"..tostring(key));
     Event.Brocast(tostring(key), data);
 end
 
@@ -138,11 +140,24 @@ function Network.TestLoginSproto(buffer)
 	log('TestLoginSproto: protocal:>'..protocal);
 end
 
+--登陆结果--
+function Network.OnLoginResult(buffer)
+	local data = Util.FilterNoMsgBase(buffer);
+    local msg = NFMsgPreGame_pb.AckEventResult();
+    msg:ParseFromString(data)
+    if msg.event_code == NFDefine_pb.EGEC_ACCOUNT_SUCCESS then
+        log("login sucess");
+    else
+        log("login failed");
+    end
+end
+
 --卸载网络监听--
 function Network.Unload()
     Event.RemoveListener(Protocal.Connect);
     Event.RemoveListener(Protocal.Message);
     Event.RemoveListener(Protocal.Exception);
     Event.RemoveListener(Protocal.Disconnect);
+    Event.RemoveListener(tostring(NFDefine_pb.EGMI_ACK_LOGIN));
     logWarn('Unload Network...');
 end

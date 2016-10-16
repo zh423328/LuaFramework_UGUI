@@ -2,7 +2,7 @@
 function Main()					
 	 --LuaFramework.Util.Log("HelloWorld");
 	 --local go = UnityEngine.GameObject("go");
-	 --go.transform.position = Vector3.one;		
+	 --go.transform.position = Vector3.one;	
 end
 
 --场景切换通知

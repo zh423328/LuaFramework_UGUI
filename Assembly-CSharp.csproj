@@ -179,6 +179,9 @@
      <Compile Include="Assets\LuaFramework\Scripts\ProtoCS\protobuf-net\SubItemToken.cs" />
      <Compile Include="Assets\LuaFramework\Scripts\ProtoCS\protobuf-net\WireType.cs" />
      <Compile Include="Assets\LuaFramework\Scripts\TestClass.cs" />
+     <Compile Include="Assets\LuaFramework\Scripts\UGUIEX\UIButton.cs" />
+     <Compile Include="Assets\LuaFramework\Scripts\UGUIEX\UILoopList.cs" />
+     <Compile Include="Assets\LuaFramework\Scripts\UGUIEX\UITab.cs" />
      <Compile Include="Assets\LuaFramework\Scripts\Utility\LuaHelper.cs" />
      <Compile Include="Assets\LuaFramework\Scripts\Utility\NFGUID.cs" />
      <Compile Include="Assets\LuaFramework\Scripts\Utility\Util.cs" />
@@ -322,9 +325,6 @@
      <Compile Include="Assets\LuaFramework\ToLua\Source\Generate\UnityEngine_MeshColliderWrap.cs" />
      <Compile Include="Assets\LuaFramework\ToLua\Source\Generate\UnityEngine_MeshRendererWrap.cs" />
      <Compile Include="Assets\LuaFramework\ToLua\Source\Generate\UnityEngine_MonoBehaviourWrap.cs" />
-     <Compile Include="Assets\LuaFramework\ToLua\Source\Generate\UnityEngine_ParticleAnimatorWrap.cs" />
-     <Compile Include="Assets\LuaFramework\ToLua\Source\Generate\UnityEngine_ParticleEmitterWrap.cs" />
-     <Compile Include="Assets\LuaFramework\ToLua\Source\Generate\UnityEngine_ParticleRendererWrap.cs" />
      <Compile Include="Assets\LuaFramework\ToLua\Source\Generate\UnityEngine_ParticleSystemWrap.cs" />
      <Compile Include="Assets\LuaFramework\ToLua\Source\Generate\UnityEngine_PhysicsWrap.cs" />
      <Compile Include="Assets\LuaFramework\ToLua\Source\Generate\UnityEngine_PlayModeWrap.cs" />
@@ -355,7 +355,11 @@
      <Compile Include="Assets\LuaFramework\ToLua\Source\LuaConst.cs" />
      <None Include="Assets\3rd Tools\GenBabeluaApi\readme.txt" />
      <None Include="Assets\codeandweb.com\Editor\SettingsTexturePackerImporter.txt" />
+     <None Include="Assets\LuaFramework\Resources\Shader\Button.shader" />
+     <None Include="Assets\StreamingAssets\files.txt" />
+     <None Include="Assets\LuaFramework\Resources\Shader\Default No-Alpha.shader" />
      <None Include="Assets\LuaFramework\Scripts\ProtoCS\protobuf-net\Web\TODO.txt" />
+     <None Include="Assets\LuaFramework\Resources\Shader\Gray.shader" />
      <None Include="Assets\LuaFramework\ToLua\readme.txt" />
      <None Include="Assets\codeandweb.com\Readme.txt" />
  <Reference Include="UnityEngine.UI">
